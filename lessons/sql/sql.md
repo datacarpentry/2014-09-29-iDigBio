@@ -7,7 +7,7 @@ Setup
 1. Install Firefox
 2. Install the SQLite Manager add on **Tools -> Add-ons -> Search -> SQLite
 Manager -> Install -> Restart**
-3. Download the [Portal Database](https://github.com/datacarpentry/datacarpentry/tree/master/lessons/sql/portal_mammals.sqlite)
+3. Download the [Portal Database](https://github.com/datacarpentry/2014-09-29-iDigBio/blob/master/data/biology/portal_mammals.sqlite?raw=true)
 4. Open SQLite Manage **Firefox Button -> Web Developer -> SQLite Manager**
 
 
