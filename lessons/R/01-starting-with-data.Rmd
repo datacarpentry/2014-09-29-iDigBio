@@ -84,18 +84,18 @@ print("hello world")
 
 We are studying the species and weight of animals caught in plots in our study area.
 The data sets are stored in .csv each row holds information for a single animal, 
-and the columns represent record_id,month,day,year,plot,species,sex,wgt 
+and the columns represent survey_id,month,day,year,plot,species,sex,wgt 
 The first few rows of our first file look like this:
 
-"63","8","19","1977","3","DM","M","40"
+"3a15270e-09c7-47a3-ab2e-0ffcbda1f162","8","19","1977","b564c1fc-bd87-4525-92ee-8bb36928fc10","DM","M","40"
 
-"64","8","19","1977","7","DM","M","48"
+"72ab0a58-4e6d-4aa7-b5c7-abb10d49c141","8","19","1977","a7498949-7b94-4f8e-b253-3e26bbf80710","DM","M","48"
 
-"65","8","19","1977","4","DM","F","29"
+"a174df84-6bf3-42bb-8dae-be3fd45566a7","8","19","1977","7dcaddf5-d272-4b69-a49c-d4f3cf000084","DM","F","29"
 
-"66","8","19","1977","4","DM","F","46"
+"3658f574-1f07-4601-b053-f8656cb731cf","8","19","1977","7dcaddf5-d272-4b69-a49c-d4f3cf000084","DM","F","46"
 
-"67","8","19","1977","7","DM","M","36"
+"0d17daf5-df94-475a-b57f-8aea2477cee3","8","19","1977","a7498949-7b94-4f8e-b253-3e26bbf80710","DM","M","36"
 
 ### We want to:
 
@@ -132,7 +132,7 @@ We will use `setwd()` and `read.csv()`. These are built-in functions in R. Let's
 
 ```{r, eval=FALSE}
 setwd("pathname")
-read.csv("data/surveys.csv", header=TRUE)
+read.csv("data/biology/surveys.csv", header=TRUE)
 ```
 
 The expression `read.csv()` is a function call that asks R to run the function read.csv that belongs to base R. 
@@ -266,7 +266,7 @@ What happens here is that we take the original vector weights, and we are adding
 Now that we know how to assign things to variables, let's re-run `read.csv` and save its result:
 
 ```{r}
-dat <- read.csv('data/surveys.csv', header = TRUE)
+dat <- read.csv('data/biology/surveys.csv', header = TRUE)
 ```
 
 This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:
