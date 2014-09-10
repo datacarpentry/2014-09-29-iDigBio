@@ -1,7 +1,7 @@
 Data Carpentry at iDigBio
 =========================
 
-## A Data Carpentry Workshop ##
+### A Data Carpentry Workshop ###
 Organized by and for interdisciplinary biologists and environmental scientists.
 
   iDigBio at University of Florida, Gainesville, FL
