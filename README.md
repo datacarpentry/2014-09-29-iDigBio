@@ -8,17 +8,13 @@ Organized by and for interdisciplinary biologists and environmental scientists.
 
   AMNH, New York, NY (via teleconference)
 
-
   September 29-30, 2014
 
-
-## Data Carpentry workshop materials ##
-
+### Data Carpentry workshop materials ###
 
 Github web site for this project:
 
 http://datacarpentry.github.io/2014-09-29-iDigBio/
-
 
 Wiki for this Workshop:
 
