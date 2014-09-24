@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Data Carpentry R materials</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Data Carpentry R materials</h2>
+
+<ul>
+<li>Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.</li>
+<li>A lot of scientific code is NOT reproducible.</li>
+<li>If you keep a lab notebook, why are we not as careful with our code.</li>
+<li>We edit each others manuscripts, but we don&#39;t edit each other&#39;s code.</li>
+<li>If you write your code with &ldquo;future you&rdquo; in mind, you will save yourself and others a lot of time.</li>
+</ul>
+
+<h1>Basics of R</h1>
+
+<p>R is a versatile, open source programming/scripting language that&#39;s useful both for statistics but also data science. Inspired by the programming language S.</p>
+
+<ul>
+<li>Open source software under GPL.</li>
+<li>Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It&#39;s widely used both in academia and industry.</li>
+<li>Available on all platforms.</li>
+<li>Not just for statistics, but also general purpose programming.</li>
+<li>Is object oriented and functional.</li>
+<li>Large and growing community of peers.</li>
+</ul>
+
+<h2>Commenting</h2>
+
+<p>Use <code>#</code> signs to comment. Comment liberally in your R scripts. Anything to the right of a <code>#</code> is ignored by R.</p>
+
+<h2>Assignment operator</h2>
+
+<p><code>&lt;-</code> is the assignment operator. Assigns values on the right to objects on the left. Mostly similar to <code>=</code> but not always. Learn to use <code>&lt;-</code> as it is good programming practice. Using <code>=</code> in place of <code>&lt;-</code> can lead to issues down the line.</p>
+
+<p><code>=</code> should only be used to specify the values of arguments in functions for instance <code>read.csv(file=&quot;data/some_data.csv&quot;)</code>.</p>
+
+<h2>Good practices</h2>
+
+<p>The recommended approach when working on a data analysis project is dubbed &ldquo;the source code is real&rdquo;. The objects you are creating should be seen as disposable as they are the direct realization of your code. Every object can be recreated from your code, and all steps are documented. Therefore, it is best to enter as little commands as possible in the R console. Instead, all code should be written in script files, and evaluated from there. The R console should be used to inspect objects, test a function or get help. With this approach, the <code>.Rhistory</code> file automatically created during your session should not be very useful.</p>
+
+<p>Similarly, you should separate the original data (raw data) from intermediate datasets that you may create for the need of a particular analysis. For instance, you may want to create a <code>data/</code> directory within your working directory that stores the raw data, and have a <code>data_output/</code> directory for intermediate datasets and a <code>figure_output/</code> directory for the plots you will generate.</p>
+
+<h1>Presentation of RStudio</h1>
+
+<p>Let&#39;s start by learning about our tool.</p>
+
+<p><em>Point out the different windows in R.</em></p>
+
+<ul>
+<li>Console, Scripts, Environments, Plots</li>
+<li>Avoid using shortcuts.</li>
+<li>Code and workflow is more reproducible if we can document everything that we do.</li>
+<li>Our end goal is not just to &ldquo;do stuff&rdquo; but to do it in a way that anyone can easily and exactly replicate our workflow and results.</li>
+</ul>
+
+<h1>Introduction to R</h1>
+
+<p><em>Start by showing an example of a script</em></p>
+
+<ul>
+<li>Point to the different parts:
+
+<ul>
+<li>a function</li>
+<li>the assignment operator</li>
+<li>the <code>=</code> for arguments</li>
+<li>the comments and how they are used to document function and its content</li>
+</ul></li>
+<li>Show the structure and the identation to improve clarity</li>
+</ul>
+
+<h2>Creating objects</h2>
+
+<p>You can get output from R simply by typing in math</p>
+
+<pre><code class="r">3 + 5
+12/7
+</code></pre>
+
+<p>However, to do useful and interesting things, we need to assign <em>values</em> to <em>objects</em>. To create objects, we need to give it a name followed by the assignment operator <code>&lt;-</code> and the value we want to give it:</p>
+
+<pre><code class="r">weight_kg &lt;- 55
+</code></pre>
+
+<p>Objects can be given any name such as <code>x</code>, <code>current_temperature</code>, or <code>subject_id</code>. You want your object names to be explicit and not too long. They cannot start with a number (<code>2x</code> is not valid but <code>x2</code> is). When assigning a value to an object, R does not print anything. You can force to print the value by using parentheses or by typing the name:</p>
+
+<pre><code class="r">(weight_kg &lt;- 55)
+weight_kg
+</code></pre>
+
+<p>Now that R has <code>weight_kg</code> in memory, we can do arithmetic with it. For instance, we may want to convert this weight in pounds (weight in pounds is 2.2 times the weight in kg):</p>
+
+<pre><code class="r">2.2 * weight_kg
+</code></pre>
+
+<p>We can also change a variable&#39;s value by assigning it a new one:</p>
+
+<pre><code class="r">weight_kg &lt;- 57.5
+2.2 * weight_kg
+</code></pre>
+
+<p>This means that assigning a value to one variable does not change the values of other variables.  For example, let&#39;s store the animal&#39;s weight in pounds in a variable.</p>
+
+<pre><code class="r">weight_lb &lt;- 2.2 * weight_kg
+</code></pre>
+
+<p>and then change weight_kg to 100.</p>
+
+<pre><code class="r">weight_kg &lt;- 100
+</code></pre>
+
+<p>What do you think is the current content of the object <code>weight_lb</code>? 126.5 or 200?</p>
+
+<h3>Exercise</h3>
+
+<p>What are the values after each statement in the following?</p>
+
+<pre><code class="r">mass &lt;- 47.5          # mass?
+age  &lt;- 122           # age?
+mass &lt;- mass * 2.0    # mass?
+age  &lt;- age - 20      # age?
+massIndex &lt;- mass/age # massIndex?
+</code></pre>
+
+<h2>Vectors and data types</h2>
+
+<p>A vector is the most common and basic data structure in R, and is pretty much the workhorse of R. It&#39;s a group of values, mainly either numbers or characters. You can assign this list of values to a variable, just like you would for one item. For example we can create a vector of animal weights:</p>
+
+<pre><code class="r">weights &lt;- c(50, 60, 65, 82)
+weights
+</code></pre>
+
+<p>A vector can also contain characters:</p>
+
+<pre><code class="r">animals &lt;- c(&quot;mouse&quot;, &quot;rat&quot;, &quot;dog&quot;)
+animals
+</code></pre>
+
+<p>There are many functions that allow you to inspect the content of a vector. <code>length()</code> tells you how many elements are in a particular vector:</p>
+
+<pre><code class="r">length(weights)
+length(animals)
+</code></pre>
+
+<p><code>class()</code> indicates the class (the type of element) of an object:</p>
+
+<pre><code class="r">class(weights)
+class(animals)
+</code></pre>
+
+<p>The function <code>str()</code> provides an overview of the object and the elements it contains. It is a really useful function when working with large and complex objects:</p>
+
+<pre><code class="r">str(weights)
+str(animals)
+</code></pre>
+
+<p>You can add elements to your vector simply by using the <code>c()</code> function:</p>
+
+<pre><code class="r">weights &lt;- c(weights, 90) # adding at the end
+weights &lt;- c(30, weights) # adding at the beginning
+weights
+</code></pre>
+
+<p>What happens here is that we take the original vector weights, and we are adding another item first to the end of the other ones, and then another item at the beginning. We can do this over and over again to build a vector or a dataset. As we program, this may be useful to autoupdate results that we are collecting or calculating.</p>
+
+<p>We just saw 2 of the 6 <strong>data types</strong> that R uses: <code>&quot;character&quot;</code> and <code>&quot;numeric&quot;</code>. The other 4 are:</p>
+
+<ul>
+<li><code>&quot;complex&quot;</code> to represent complex numbers with real and imaginary parts (e.g., <code>1+4i</code>) and that&#39;s all we&#39;re going to say about them</li>
+<li><code>&quot;raw&quot;</code> that we won&#39;t discuss further</li>
+<li><code>&quot;logical&quot;</code> for <code>TRUE</code> and <code>FALSE</code></li>
+<li><code>&quot;integer&quot;</code> for integer numbers (e.g., <code>2L</code>, the <code>L</code> indicates to R that it&#39;s an integer)</li>
+</ul>
+
+<p>Vectors are one of the many <strong>data structures</strong> that are part of R. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>) and factors (<code>factor</code>). We will talk about <code>data.frame</code> soon but first we need to talk about <code>factor</code>.</p>
+
+<h3>Factors</h3>
+
+<p>Factors are special vectors that represent categorical data. Factors can be ordered or unordered and are important for statistical analysis and for plotting.</p>
+
+<p>Factors are stored as integers that have labels associated the unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
+
+<p>Once created factors can only contain a pre-defined set values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order, so if you have a factor with 2 levels, for instance</p>
+
+<pre><code class="r">sex &lt;- factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;))
+</code></pre>
+
+<p>R will assign 1s to the level <code>&quot;female&quot;</code> and 2s to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
+
+<pre><code class="r">levels(sex)
+</code></pre>
+
+<p>Sometimes, the order of the factors does not matter, other times you might want factors to be ordered (or ranked), because the order is meaningful or it is required by a particular type of analysis (e.g., low, medium, high).</p>
+
+<pre><code class="r">food &lt;- factor(c(&quot;low&quot;, &quot;high&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))
+levels(food)
+food &lt;- factor(c(&quot;low&quot;, &quot;high&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;),
+               levels=c(&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;), ordered=TRUE)
+levels(food)
+</code></pre>
+
+<p>In R&#39;s memory, these vectors of factors are represented by numbers 1, 2, 3. They are better than using simple integer labels because factors are what are called self describing: <code>&quot;male&quot;</code> and <code>&quot;female&quot;</code>&ldquo; is more descriptive than 1s and 2s. Which is male? 1 or 2? You wouldn&#39;t be able to tell with just integer data. Factors have this information built in. It is particularly helpful when there are many levels (like the species in our example data set), or when there is no additional metadata (for simple datasets, real datasets always have metadata, right?)</p>
+
+<p>If you need to convert a factor to a character vector, simply use</p>
+
+<pre><code class="r">as.character(x)
+</code></pre>
+
+<pre><code>## Error: object &#39;x&#39; not found
+</code></pre>
+
+<p>Converting a factor to a numeric vector is however a little trickier, and you have to go via a character vector. Compare:</p>
+
+<pre><code class="r">f &lt;- factor(c(1,5,10,2))
+as.numeric(f) ## wrong! and there will be no warnings...
+as.numeric(as.character(f))
+</code></pre>
+
+<p><strong>BREAK</strong></p>
+
+<ul>
+<li>Make sure everyone has imported the data</li>
+<li>tell me how many rows and columns there are</li>
+<li>what kind of data is it?</li>
+</ul>
+
+<h1>Importing the data</h1>
+
+<h3>We want to:</h3>
+
+<ul>
+<li>load that data</li>
+<li>calculate the average weight of the animals across all animals, and</li>
+<li>plot the result.
+To do all that, we&#39;ll have to learn a little bit about programming.</li>
+</ul>
+
+<h2>Analyzing Survey Data</h2>
+
+<p>We are studying the species and weight of animals caught in plots in our study area.
+The data sets are stored in .csv each row holds information for a single animal,
+and the columns represent survey_id,month,day,year,plot,species,sex,wgt
+The first few rows of our first file look like this:</p>
+
+<pre><code>&quot;3a15270e-09c7-47a3-ab2e-0ffcbda1f162&quot;,&quot;8&quot;,&quot;19&quot;,&quot;1977&quot;,&quot;b564c1fc-bd87-4525-92ee-8bb36928fc10&quot;,&quot;DM&quot;,&quot;M&quot;,&quot;40&quot;
+&quot;72ab0a58-4e6d-4aa7-b5c7-abb10d49c141&quot;,&quot;8&quot;,&quot;19&quot;,&quot;1977&quot;,&quot;a7498949-7b94-4f8e-b253-3e26bbf80710&quot;,&quot;DM&quot;,&quot;M&quot;,&quot;48&quot;
+&quot;a174df84-6bf3-42bb-8dae-be3fd45566a7&quot;,&quot;8&quot;,&quot;19&quot;,&quot;1977&quot;,&quot;7dcaddf5-d272-4b69-a49c-d4f3cf000084&quot;,&quot;DM&quot;,&quot;F&quot;,&quot;29&quot;
+&quot;3658f574-1f07-4601-b053-f8656cb731cf&quot;,&quot;8&quot;,&quot;19&quot;,&quot;1977&quot;,&quot;7dcaddf5-d272-4b69-a49c-d4f3cf000084&quot;,&quot;DM&quot;,&quot;F&quot;,&quot;46&quot;
+&quot;0d17daf5-df94-475a-b57f-8aea2477cee3&quot;,&quot;8&quot;,&quot;19&quot;,&quot;1977&quot;,&quot;a7498949-7b94-4f8e-b253-3e26bbf80710&quot;,&quot;DM&quot;,&quot;M&quot;,&quot;36&quot;
+</code></pre>
+
+<p>To load our survey data, we need to locate our data. We will use <code>setwd()</code> to tell R to <em>set</em> our _w_orking _d_irectory, in other words where to look for files and save outputs, and <code>read.csv()</code> to load into memory (as a <code>data.frame</code>) the content of the CSV file.</p>
+
+<ul>
+<li>download the data file</li>
+<li>put it in directory &quot;data&rdquo; of your working directory for these exercises</li>
+</ul>
+
+<pre><code class="r">setwd(&quot;/somewhere/on/your/hard/drive&quot;)
+</code></pre>
+
+<pre><code class="r">srvys &lt;- read.csv(&#39;data/surveys.csv&#39;, stringsAsFactors=FALSE)
+</code></pre>
+
+<pre><code>## Warning: cannot open file &#39;data/surveys.csv&#39;: No such file or directory
+</code></pre>
+
+<pre><code>## Error: cannot open the connection
+</code></pre>
+
+<p>This statement doesn&#39;t produce any output because assignment doesn&#39;t display anything. If we want to check that our data has been loaded, we can print the variable&#39;s value:</p>
+
+<pre><code class="r">srvys
+</code></pre>
+
+<pre><code>## Error: object &#39;srvys&#39; not found
+</code></pre>
+
+<p>Wow&hellip; that was a lot of output. At least it means the data loaded properly. Let&#39;s check the top (the first 6 lines) of this <code>data.frame</code> using the function <code>head()</code>:</p>
+
+<pre><code class="r">head(srvys)
+</code></pre>
+
+<pre><code>## Error: object &#39;srvys&#39; not found
+</code></pre>
+
+<p>Let&#39;s now check the _str_ucture of this <code>data.frame</code> in more details with the function <code>str()</code>:</p>
+
+<pre><code class="r">str(srvys)
+</code></pre>
+
+<pre><code>## Error: object &#39;srvys&#39; not found
+</code></pre>
+
+<p><code>header</code> tells the program if the first line contains column names or data.</p>
+
+<h3>Objectives</h3>
+
+<ul>
+<li>Explain what a library is, and what libraries are used for.</li>
+<li>Load an R library and use the things it contains.</li>
+<li>Read tabular data from a file into a program.</li>
+<li>Assign values to variables.</li>
+<li>Learn about data types</li>
+<li>Select individual values and subsections from data.</li>
+<li>Perform operations on arrays of data.</li>
+<li>Display simple graphs.</li>
+</ul>
+
+<h2>Loading Data</h2>
+
+<hr/>
+
+<p>Words are useful, but what&#39;s more useful are the sentences and stories we use them to build.
+Similarly, while a lot of powerful tools are built into languages like R,
+even more lives in the libraries they are used to build.
+Importing a library is like getting a piece of lab equipment out of a storage locker
+and setting it up on the bench.
+Once it&#39;s done, we can ask the library to do things for us.</p>
+
+<pre><code class="r">setwd(&quot;pathname&quot;)
+read.csv(&quot;data/biology/surveys.csv&quot;, header=TRUE)
+</code></pre>
+
+<p>When we are finished typing and press <code>Control+Enter</code> on Windows or <code>Cmd + Return</code> on Mac, the console runs our command.
+Since we haven&#39;t told it to do anything else with the function&#39;s output, the console displays it.
+In this case, that output is the data we just loaded.</p>
+
+<p>Our call to <code>read.csv</code> read our file, but didn&#39;t save the data in memory.
+To do that, we need to assign the data frame to a variable.</p>
+
+<h2>Manipulating Data</h2>
+
+<p>Now that our data is in memory, we can start doing things with it.
+First, let&#39;s ask what type of thing data refers to:</p>
+
+<pre><code class="r">class(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">str(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">summary(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>The class output tells us that data currently is a data.frame in R.</p>
+
+<p>This is similar to a spreadsheet in excel, that many of us are familiar with using.</p>
+
+<p>The str output tells us what columns there are and what type they are.</p>
+
+<p>The summary output summarizes our columns and shows us the range of our values.</p>
+
+<h3>data frames</h3>
+
+<p>are the de facto data structure for most tabular data and what we use for statistics. They can have a mix of data types, e.g.characters, integers, factors.</p>
+
+<p>Data frames can have additional attributes such as <code>rownames()</code>, which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.</p>
+
+<p>Some additional information on data frames:</p>
+
+<ul>
+<li>Usually created by <code>read.csv()</code> and <code>read.table()</code>.</li>
+<li>Coercion will be forced and not always what you expect.</li>
+<li>Can also create with <code>data.frame()</code> function.</li>
+<li>Find the number of rows and columns with <code>nrow(dat)</code> and <code>ncol(dat)</code>, respectively.</li>
+<li>Rownames are usually 1..n.</li>
+</ul>
+
+<p><strong>Useful functions</strong></p>
+
+<ul>
+<li><code>head()</code> - see first 6 rows</li>
+<li><code>tail()</code> - see last 6 rows</li>
+<li><code>dim()</code> - see dimensions</li>
+<li><code>nrow()</code> - number of rows</li>
+<li><code>ncol()</code> - number of columns</li>
+<li><code>str()</code> - structure of each column</li>
+<li><code>names()</code> - will list the names attribute for a data frame (or any object really), which gives the column names.</li>
+<li>A data frame is a special type of list where every element of the list has same length.</li>
+</ul>
+
+<p><code>str</code> output tells us the dimensions and the data types (int is integer) of each column.</p>
+
+<p>We can see what its shape is like this:</p>
+
+<pre><code class="r">dim(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">nrow(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">ncol(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>This tells us that data has 35549 rows and 8 columns.</p>
+
+<p>Let&#39;s look at the structure of the data again</p>
+
+<pre><code class="r">str(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>If we look at &#39;plot&#39; it says it&#39;s an integer.
+ $ plot     : int  2 3 2 7 3 1 2 1 1 6
+and it is an integer, but in our case we want it to be a factor. Basically it&#39;s a category. We don&#39;t want to be able to do math with it. We want to be able to ask things about that category. So we&#39;re going to change it from an integer to a factor in our data frame.</p>
+
+<pre><code class="r">dat$plot &lt;- as.factor(dat$plot)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>In RStudio we can also import data through the Tools -&gt; Import Dataset menu. This lets us select the data types and delimiters as we import it. So, if we did it this way, we wouldn&#39;t have to change the variable attributes like this.</p>
+
+<h3>Indexing</h3>
+
+<p>If we want to get a single value from the data frame,
+we must provide an index in square brackets, just as we do in math:</p>
+
+<pre><code class="r">paste(&#39;first value in data:&#39;, dat[1,1])
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">paste(&#39;middle value in data:&#39;, dat[3,2])
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, because that&#39;s what human beings have done for thousands of years.
+Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that&#39;s simpler for computers to do.</p>
+
+<p>An index like [3, 2] selects a single element of an array,
+but we can select whole sections as well.
+For example, we can select the month, day and year (columns) of values
+for the first four (rows) animals like this:</p>
+
+<pre><code class="r">dat[1:4, 1:3]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>The slice 1:4 means, &ldquo;Start at index 1 and go to index 4.&rdquo;
+We don&#39;t have to start slices at 0:</p>
+
+<pre><code class="r">dat[5:10, 0:3]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>and we don&#39;t have to take all the values in the slice, we can use <code>c()</code> to select certain values or groups of values:</p>
+
+<pre><code class="r">dat[c(1:10, 20:30), c(1:3, 7:8)]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Here we have taken rows 1 through 10 and 20 through 30 and columns 1 through 3 and 7 through 8.</p>
+
+<pre><code class="r">dat[seq(1, 12, 3), seq(1, 8, 3)]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Here we have used the built-in function seq to take regularly spaced rows and columns.
+For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, and 7.
+(Again, we always include the lower bound, but stop when we reach or cross the upper bound.)</p>
+
+<p><strong>EXERCISES</strong></p>
+
+<ol>
+<li>If data holds our array of survey data, what does <code>data[3:3, 4:4]</code> produce?
+What about <code>data[3:3, 4:1]</code>? Explain the results to the person sitting next to you</li>
+</ol>
+
+<h2>Calculating statistics</h2>
+
+<p>We&#39;ve gotten our data in to R, so that we can do some analysis with it.
+First, let&#39;s get a sense of our data
+We might for instance want to know how many animals we trapped in each plot, or
+how many of each species were caught.</p>
+
+<p>We can look at just one column at a time in different ways. We can reference that
+column by it&#39;s number</p>
+
+<pre><code class="r"># Look at the weight column, the 8th one
+dat[,8]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>or by its name</p>
+
+<pre><code class="r"># Look at the weight column, by its name wgt
+dat$wgt
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>If you forget the column names, you can type</p>
+
+<pre><code class="r">colnames(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>or</p>
+
+<pre><code class="r">str(dat)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>will show you the column names and the type of data in them</p>
+
+<p>If we do this, we can see for instance that there are 48 species
+Factor w/ 48 levels means there are 48 different versions of that factor</p>
+
+<p>So, let&#39;s get a list of all the species. The &#39;unique&#39; command tells us all the
+unique names in that column.</p>
+
+<pre><code class="r">unique(dat$species)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Now let&#39;s see how many of each species we have</p>
+
+<pre><code class="r">table(dat$species)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>We could even assign it to a variable and make it a data frame to make it easier to look at</p>
+
+<pre><code class="r">species_table &lt;- as.data.frame(table(dat$species))
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Maybe we also want to see how many animals were captured in each plot</p>
+
+<pre><code class="r">table(dat$plot)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Now we want to do some actual calculations with the data though. Let&#39;s calculate the average weight of all the animals. R has a lot of built in statistical functions, like mean, median, max, min</p>
+
+<pre><code class="r">mean(dat$wgt)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Hmm, we just get NA. That&#39;s because we don&#39;t have the weight for every animal
+and it&#39;s recorded as NA when we don&#39;t. We can&#39;t do math on NA. Conveniently R
+provides a function na.omit() that will omit NAs from your data.</p>
+
+<p>How many animals would we omit. We can look at how many animals we have overall and subtract how many we have after the NAs are omitted.</p>
+
+<p>Because data is in a vector, when we want to know how much of something we have
+we ask how long it is with the length() function.</p>
+
+<pre><code class="r">length(dat$wgt)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">length(na.omit(dat$wgt))
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>We can then subtract those numbers</p>
+
+<pre><code class="r">length(dat$wgt) - length(na.omit(dat$wgt))
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>We can see we&#39;ll be omitting 3266 animals. Bummer, but not terrible when we&#39;ve sampled over 35,000 animals.</p>
+
+<p>Let&#39;s calculate their average weight</p>
+
+<pre><code class="r">mean(na.omit(dat$wgt))
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>It gets a little annoying to type na.omit(dat$wgt) each time we want to do the calculation, so we can actually create a new data frame with the rows that have
+NA omitted with the complete.cases() command. Don&#39;t worry too much about this. You can google it to learn more about it if you need to use it.</p>
+
+<pre><code class="r">dat2 &lt;- dat[complete.cases(dat$wgt),]
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<pre><code class="r">mean(dat2$wgt)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat2&#39; not found
+</code></pre>
+
+<p><strong>EXERCISES</strong></p>
+
+<p>R has a bunch of handy statistical functions built in. Calculate the median, standard deviation, minimum and maximum weight. For bonus points calculate the standard error.</p>
+
+<h2>Statistics on subsets of data</h2>
+
+<p>When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.</p>
+
+<p>One way to do this is to select the data we want to create a new temporary array, using the subset() function</p>
+
+<p>Let&#39;s look at just the animals of species &#39;DO&#39;</p>
+
+<pre><code class="r">speciesDO &lt;- subset(dat, species == &#39;DO&#39;)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>We could see in our table from before that &#39;DO&#39; had 3027 species. Let&#39;s check to see if that&#39;s what we have by checking the number of rows</p>
+
+<pre><code class="r">nrow(speciesDO)
+</code></pre>
+
+<pre><code>## Error: object &#39;speciesDO&#39; not found
+</code></pre>
+
+<p><strong>EXERCISE</strong></p>
+
+<p>Calculate the mean and standard deviation of just the DO species</p>
+
+<h2>FUNCTIONS - Operations Across Axes</h2>
+
+<p>What if we need the maximum weight for all animals, or the average for each plot?
+As the diagram below shows, we want to perform the operation across an axis:</p>
+
+<p>To support this, in R we can use the <code>apply</code> or &#39;tapply&#39; function:
+tapply() takes a vector, so we&#39;ll use that</p>
+
+<pre><code class="r">help(tapply) #or ?apply
+</code></pre>
+
+<p>Apply allows us to repeat a function on all of the rows (1), columns (2), or both(1:2) of an array or matrix.</p>
+
+<p>What if you wanted to now go on and calculate the average weight of each species.
+You could do this one by one, but you can actually do it all at once with the tapply() function.</p>
+
+<p>The format is</p>
+
+<p>tapply(data_you_want_to_calculate, factor_to_sort_on, function)</p>
+
+<pre><code class="r">tapply(dat2$wgt, dat2$species, mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat2&#39; not found
+</code></pre>
+
+<p>Now we can put all the means into a variable</p>
+
+<pre><code class="r">species_means &lt;- tapply(dat2$wgt, dat2$species, mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat2&#39; not found
+</code></pre>
+
+<p>We still get NAs. That&#39;s because of the way that R keeps track of NAs when
+you&#39;re converting data frames. There are ways to get around that for the apply
+function, but we can use the aggregate function instead, which we&#39;ll cover next.</p>
+
+<h3>Challenge</h3>
+
+<ol>
+<li>Find the maximum and minimum values for weight for each species</li>
+<li>Save these values to a varible.</li>
+<li>What is the length of your new variable?</li>
+</ol>
+
+<pre><code class="r">species_max &lt;- tapply(dat2$wgt, dat2$species, max)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat2&#39; not found
+</code></pre>
+
+<pre><code class="r">species_min &lt;- tapply(dat2$wgt, dat2$species, min)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat2&#39; not found
+</code></pre>
+
+<pre><code class="r">length(species_max)
+</code></pre>
+
+<pre><code>## Error: object &#39;species_max&#39; not found
+</code></pre>
+
+<pre><code class="r">length(species_min)
+</code></pre>
+
+<pre><code>## Error: object &#39;species_min&#39; not found
+</code></pre>
+
+<p>Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.</p>
+
+<pre><code class="r">d.summary = data.frame(species_means, species_min, species_max)
+</code></pre>
+
+<pre><code>## Error: object &#39;species_means&#39; not found
+</code></pre>
+
+<p>We can also do this with the aggregate function, which deals with the NA rows that we eliminated more nicely. This is a very useful function, and it puts the output in to a data frame rather than a list.
+If you look at documentation for aggregate() there&#39;s a few different ways to write the function. This is one way.</p>
+
+<p>The format is
+aggregate(what-to-plot~what-you-want-it-sorted-by, data=the-dataset, function)</p>
+
+<pre><code class="r">mean_species &lt;- aggregate(wgt~species, data=dat, mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Maybe we want to look at the data average per species per plot</p>
+
+<pre><code class="r">aggregate(wgt~species+plot, data=dat, mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p>Or we just want to look at the average of particular species in each plot. Then we can subset the data within the function</p>
+
+<pre><code class="r">aggregate(wgt~species+plot, data=subset(dat, species == &quot;DO&quot;), mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<p><strong>EXERCISES</strong></p>
+
+<ol>
+<li>Create a data frame with the standard deviation of weight for each species</li>
+</ol>
+
+<pre><code class="r">sd_species &lt;- aggregate(wgt~species, data=dat, sd)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<h2>Plotting</h2>
+
+<p>The mathematician Richard Hamming once said, &ldquo;The purpose of computing is insight, not numbers,&rdquo; and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R&#39;s base plotting package and ggplot2 here.</p>
+
+<p>Lets use the average species data that we saved and plot it.</p>
+
+<p>R has built in plotting functions</p>
+
+<pre><code class="r">barplot(mean_species$wgt, names.arg=mean_species$species)
+</code></pre>
+
+<pre><code>## Error: object &#39;mean_species&#39; not found
+</code></pre>
+
+<p>The axis labels are too big though, so you can&#39;t see them all. Let&#39;s change that</p>
+
+<pre><code class="r">barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4)
+</code></pre>
+
+<pre><code>## Error: object &#39;mean_species&#39; not found
+</code></pre>
+
+<p>and change the color</p>
+
+<pre><code class="r">barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c(&quot;blue&quot;))
+</code></pre>
+
+<pre><code>## Error: object &#39;mean_species&#39; not found
+</code></pre>
+
+<p><strong>EXERCISES</strong></p>
+
+<ol>
+<li>Create a plot showing the standard deviation of the species data</li>
+</ol>
+
+<pre><code class="r">barplot(sd_species$wgt, names.arg=sd_species$species)
+</code></pre>
+
+<pre><code>## Error: object &#39;sd_species&#39; not found
+</code></pre>
+
+<ol>
+<li>Calculate the average weight by plot id</li>
+</ol>
+
+<pre><code class="r">plot_mean &lt;- aggregate(wgt~plot, data=dat, mean)
+</code></pre>
+
+<pre><code>## Error: object &#39;dat&#39; not found
+</code></pre>
+
+<ol>
+<li>Plot the average weight by plot and make the bars red</li>
+</ol>
+
+<pre><code class="r">barplot(plot_mean$wgt, names.arg=plot_mean$species, col=c(&quot;red&quot;))
+</code></pre>
+
+<pre><code>## Error: object &#39;plot_mean&#39; not found
+</code></pre>
+
+<p>There&#39;s lots of different ways to plot things. You can use</p>
+
+<pre><code class="r">help(barplot)
+</code></pre>
+
+<p>or search online</p>
+
+<p>There&#39;s also a plotting package called ggplot that adds a lot of functionality. I&#39;m not going to go through it, but you can see a gallery of what&#39;s possible for plotting with ggplot.</p>
+
+<p>Basically, you can do almost anything, and you can spend infinite time refining it.</p>
+
+<p>If you wanted to output this plot do a pdf rather than to the screen, you can
+specify where you want the plot to go with the &#39;pdf&#39; command. If you wanted
+it to be a jpeg, you would set it as &#39;jpeg&#39;</p>
+
+<p>Be sure to add the &#39;dev.off()&#39; command at the end.
+That command makes it so that the plots go back to getting printed within R.
+Otherwise every new plot you make will get printed to that pdf.</p>
+
+<pre><code class="r">pdf(&quot;R_plot.pdf&quot;)
+barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c(&quot;blue&quot;))
+</code></pre>
+
+<pre><code>## Error: object &#39;mean_species&#39; not found
+</code></pre>
+
+<pre><code class="r">dev.off()
+</code></pre>
+
+<p><strong>Package management</strong></p>
+
+<p><code>install.packages(&quot;package-name&quot;)</code> will download a package from one of the CRAN mirrors assuming that a binary is available for your operating system. If you have not set a preferred CRAN mirror in your options(), then a menu will pop up asking you to choose a location.</p>
+
+<p>Use <code>old.packages()</code> to list all your locally installed packages that are now out of date. <code>update.packages()</code> will update all packages in the known libraries interactively. This can take a while if you haven&#39;t done it recently. To update everything without any user intervention, use the <code>ask = FALSE</code> argument.</p>
+
+<p>In RStudio, you can also do package management through Tools -&gt; Install Packages.</p>
+
+<p>Updating packages can sometimes make changes, so if you already have a lot of code in R, don&#39;t run this now. Otherwise let&#39;s just go ahead and update our pacakges so things are up to date.</p>
+
+<pre><code class="r">update.packages(ask = FALSE)
+</code></pre>
+
+<h2>Key Points</h2>
+
+<ul>
+<li>Import a library into a program using library libraryname.</li>
+<li>What are the data types in R?</li>
+<li>Use <code>variable = value</code> to assign a value to a variable in order to record it in memory.</li>
+<li>Variables are created on demand whenever a value is assigned to them.</li>
+<li>Use print something to display the value of something.</li>
+<li>The expression <code>dim()</code> gives the dimensions of a data frame or matrix.</li>
+<li>Use <code>object[x, y]</code> to select a single element from an array.</li>
+<li>Array indices start at 1.</li>
+<li>Use low:high to specify a slice that includes the indices from low to high.</li>
+<li>Use # some kind of explanation to add comments to programs.</li>
+<li>Use <code>mean()</code>, <code>max()</code>, <code>min()</code> and <code>sd()</code> to calculate simple statistics.</li>
+<li>Update vectors using append</li>
+<li>Use base R and the <code>ggplot2</code> library for creating simple visualizations.</li>
+</ul>
+
+</body>
+
+</html>
