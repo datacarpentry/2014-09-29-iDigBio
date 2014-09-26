@@ -1,7 +1,4 @@
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(results='hide')
-```
+
 
 # Data Carpentry R materials
 
@@ -101,14 +98,16 @@ _Start by showing an example of a script_
 
 You can get output from R simply by typing in math in the console
 
-```{r}
+
+```r
 3 + 5
 12/7
 ```
 
 However, to do useful and interesting things, we need to assign _values_ to _objects_. To create objects, we need to give it a name followed by the assignment operator `<-` and the value we want to give it:
 
-```{r}
+
+```r
 weight_kg <- 55
 ```
 
@@ -116,34 +115,39 @@ Objects can be given any name such as `x`, `current_temperature`, or `subject_id
 
 When assigning a value to an object, R does not print anything. You can force to print the value by using parentheses or by typing the name:
 
-```{r}
+
+```r
 (weight_kg <- 55)
 weight_kg
 ```
 
 Now that R has `weight_kg` in memory, we can do arithmetic with it. For instance, we may want to convert this weight in pounds (weight in pounds is 2.2 times the weight in kg):
 
-```{r}
+
+```r
 2.2 * weight_kg
 ```
 
 We can also change a variable's value by assigning it a new one:
 
 
-```{r}
+
+```r
 weight_kg <- 57.5
 2.2 * weight_kg
 ```
 
 This means that assigning a value to one variable does not change the values of other variables.  For example, let's store the animal's weight in pounds in a variable.
 
-```{r}
+
+```r
 weight_lb <- 2.2 * weight_kg
 ```
 
 and then change `weight_kg` to 100.
 
-```{r}
+
+```r
 weight_kg <- 100
 ```
 
@@ -153,7 +157,8 @@ What do you think is the current content of the object `weight_lb`? 126.5 or 200
 
 What are the values after each statement in the following?
 
-```{r}
+
+```r
 mass <- 47.5          # mass?
 age  <- 122           # age?
 mass <- mass * 2.0    # mass?
@@ -165,42 +170,48 @@ massIndex <- mass/age # massIndex?
 
 A vector is the most common and basic data structure in R, and is pretty much the workhorse of R. It's a group of values, mainly either numbers or characters. You can assign this list of values to a variable, just like you would for one item. For example we can create a vector of animal weights:
 
-```{r}
+
+```r
 weights <- c(50, 60, 65, 82)
 weights
 ```
 
 A vector can also contain characters:
 
-```{r}
+
+```r
 animals <- c("mouse", "rat", "dog")
 animals
 ```
 
 There are many functions that allow you to inspect the content of a vector. `length()` tells you how many elements are in a particular vector:
 
-```{r}
+
+```r
 length(weights)
 length(animals)
 ```
 
 `class()` indicates the class (the type of element) of an object:
 
-```{r}
+
+```r
 class(weights)
 class(animals)
 ```
 
 The function `str()` provides an overview of the object and the elements it contains. It is a really useful function when working with large and complex objects:
 
-```{r}
+
+```r
 str(weights)
 str(animals)
 ```
 
 You can add elements to your vector simply by using the `c()` function:
 
-```{r}
+
+```r
 weights <- c(weights, 90) # adding at the end
 weights <- c(30, weights) # adding at the beginning
 weights
@@ -224,20 +235,23 @@ Factors are stored as integers that have labels associated the unique integers. 
 
 Once created factors can only contain a pre-defined set values, known as *levels*. By default, R always sorts *levels* in alphabetical order, so if you have a factor with 2 levels, for instance
 
-```{r}
+
+```r
 sex <- factor(c("male", "female", "female", "male"))
 ```
 
 R will assign `1` to the level `"female"` and `2` to the level `"male"` (because `f` comes before `m`). You can check this by using the function `levels()`, and check the number of levels using `nlevels()`:
 
-```{r}
+
+```r
 levels(sex)
 nlevels(sex)
 ```
 
 Sometimes, the order of the factors does not matter, other times you might want factors to be ordered (or ranked), because the order is meaningful or it is required by a particular type of analysis (e.g., low, medium, high).
 
-```{r}
+
+```r
 food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
 levels(food)
 food <- factor(food, levels=c("low", "medium", "high"), ordered=TRUE)
@@ -250,7 +264,8 @@ If you need to convert a factor to a character vector, simply use `as.character(
 
 Converting a factor to a numeric vector is however a little trickier, and you have to go via a character vector. Compare:
 
-```{r}
+
+```r
 f <- factor(c(1,5,10,2))
 as.numeric(f) ## wrong! and there will be no warnings...
 as.numeric(as.character(f))
@@ -261,21 +276,27 @@ as.numeric(as.character(f))
 The function `table()` tabulates observations and can be used to create
 bar plots quickly. For instance:
 
-```{r}
+
+```r
 exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
                    "control", "treat1", "treat2", "control", "treat3", "control"))
 table(exprmt)
 barplot(table(exprmt))
 ```
 
+![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
+
 **Question** How can you recreate this plot but by having "control" being listed
 last instead of first?
 
 <!---
-```{r}
+
+```r
 exprmt <- factor(exprmt, levels=c("treat1", "treat2", "treat3", "control"))
 barplot(table(exprmt))
 ```
+
+![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
 --->
 
 # Importing the survey data
@@ -320,31 +341,50 @@ To load our survey data, we need to locate the `surveys.csv` file. We will use `
 * put it in directory "data" of your working directory for these exercises
 
 
-```{r, eval=FALSE}
+
+```r
 surveys <- read.csv('data/surveys.csv')
 ```
 
-```{r, echo=FALSE}
-surveys <- read.csv('../../data/biology/surveys.csv')
-```
+
 
 This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:
 
-```{r, eval=FALSE}
+
+```r
 surveys
 ```
 
 Wow... that was a lot of output. At least it means the data loaded properly. Let's check the top (the first 6 lines) of this `data.frame` using the function `head()`:
 
-```{r, results='show'}
+
+```r
 head(surveys)
+```
+
+```
+##                              survey_id month day year
+## 1 8f58c260-4b8d-4efb-893c-84f0e4ce9e9a     7  16 1977
+## 2 1445e762-ace8-4f00-b01d-d6f75a7ba753     7  16 1977
+## 3 8c5fe0a9-1f7d-46d2-8e9d-237b310d3fde     7  16 1977
+## 4 38ef8288-7db5-45df-9435-2f7ffe8a90ef     7  16 1977
+## 5 4d9f6537-7aac-4713-a390-80877ef21f6f     7  16 1977
+## 6 fae16612-97dc-4c09-bb74-ce0f3e2d3919     7  16 1977
+##                                plot_id species sex wgt
+## 1 aeece3f0-4acf-4aaa-87cd-e04ac6c8ad2c    <NA>   M  NA
+## 2 b564c1fc-bd87-4525-92ee-8bb36928fc10    <NA>   M  NA
+## 3 aeece3f0-4acf-4aaa-87cd-e04ac6c8ad2c      DM   F  NA
+## 4 a7498949-7b94-4f8e-b253-3e26bbf80710      DM   M  NA
+## 5 b564c1fc-bd87-4525-92ee-8bb36928fc10      DM   M  NA
+## 6 b7eb122e-a7c4-4982-97a0-fa67e45e6faf      PF   M  NA
 ```
 
 __At this point, make sure all participants have the data loaded__
 
 Let's now check the __str__ucture of this `data.frame` in more details with the function `str()`:
 
-```{r}
+
+```r
 str(surveys)
 ```
 
@@ -382,7 +422,8 @@ the data, you may want to keep these columns as `character`. To do so,
 `read.csv()` and `read.table()` have an argument called `stringsAsFactors` which
 you can set to `FALSE`:
 
-```{r, eval=FALSE}
+
+```r
 some_data <- read.csv("data/some_file.csv", stringsAsFactors=FALSE)
 ```
 
@@ -394,7 +435,8 @@ these examples:
 
 __Point to the difference between character and factor output with str()__
 
-```{r}
+
+```r
 example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
                            feel=c("furry", "furry", "squishy", "spiny"),
                            weight=c(45, 8, 1.1, 0.8))
@@ -409,7 +451,8 @@ str(example_data)
 
 1. Can you predict the class for each of the columns in the following example?
 
-   ```{r}
+   
+   ```r
     country_climate <- data.frame(country=c("Canada", "Panama", "South Africa", "Australia"),
                                      climate=c("cold", "hot", "temperate", "hot/temperate"),
                                      temperature=c(10, 30, 18, "15"),
@@ -426,7 +469,8 @@ str(example_data)
 1. There are a few mistakes in this hand crafted `data.frame`, can you spot and
    fix them? Don't hesitate to experiment!
 
-   ```{r, eval=FALSE}
+   
+   ```r
     author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
                                  author_last=c(Darwin, Mayr, Dobzhansky),
                                  year=c(1942, 1970))
@@ -437,12 +481,30 @@ str(example_data)
 If we want to get a single value from the data frame, we must provide an index
 in square brackets, just as we do in math. For instance:
 
-```{r, results='show'}
-animals <- c("mouse", "rat", "dog", "cat")
+
+```r
+animals <- c("mouse", "rat", "dog")
+animals[1]
+```
+
+```
+## [1] "mouse"
+```
+
+```r
 animals[2]
-animals[c(3, 2)]
-animals[2:4]
-animals[c(1:3, 2:4)]
+```
+
+```
+## [1] "rat"
+```
+
+```r
+animals[3]
+```
+
+```
+## [1] "dog"
 ```
 
 R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start
@@ -450,65 +512,61 @@ counting at 1, because that's what human beings have done for thousands of
 years.  Languages in the C family (including C++, Java, Perl, and Python) count
 from 0 because that's simpler for computers to do.
 
-`:` is a special function that creates numeric vectors of integer in increasing
-or decreasing order, test `1:10` and `10:1` for instance. The function `seq()`
-(for sequence) can create more complex patterns:
 
-```{r}
-seq(1, 10, by=2)
-seq(1, 10, length.out=4)
-seq(1, by=5, length.out=100)
-seq(1, 8, by=3) # sequence stops to stay below upper limit
+
+An index like [3, 2] selects a single element of an array,
+but we can select whole sections as well.
+For example, we can select the month, day and year (columns) of values
+for the first four (rows) animals like this:
+
+
+```r
+dat[1:4, 1:3]
 ```
 
-Our survey data is has rows and columns, if we want to extract some specific
-data from it, we need to specify the "coordinates" we want from it. Row numbers
-come first, followed by column numbers.
-
-```{r}
-surveys[1, 1]   # first element in the first column of the data frame
-surveys[1, 6]   # first element in the 6th column
-surveys[1:3, 7] # first three elements in the 7th column
-surveys[3, ]    # the 3rd elements for all columns
-surveys[, 8]    # the entire 8th column
-head_surveys <- surveys[1:6, ] # surveys[1:6, ] is equivalent to head(surveys)
+```
+## Error: object 'dat' not found
 ```
 
-### Exercices
+The slice 1:4 means, "Start at index 1 and go to index 4."
+We don't have to start slices at 0:
 
-1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
-   in conjuction with `seq()` to create a new `data.frame` called
-   `surveys_by_10` that includes every 10th row of the survey data frame
-   starting at row 10 (10, 20, 30, ...)
 
-<!---
-```{r}
-surveys_by_10 <- surveys[seq(10, nrow(surveys), by=10), ]
-```
---->
-
-## Statistics on subsets of data
-
-When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.
-
-One way to do this is to select the data we want to create a new temporary array, using the subset() function
-
-Let's look at just the animals of species 'DO'
-
-```{r}
-speciesDO <- subset(dat, species == 'DO')
+```r
+dat[5:10, 0:3]
 ```
 
-We could see in our table from before that 'DO' had 3027 species. Let's check to see if that's what we have by checking the number of rows
-
-```{r}
-nrow(speciesDO)
+```
+## Error: object 'dat' not found
 ```
 
-__EXERCISE__
+and we don't have to take all the values in the slice, we can use `c()` to select certain values or groups of values:
 
-Calculate the mean and standard deviation of just the DO species
 
+```r
+dat[c(1:10, 20:30), c(1:3, 7:8)]
+```
+
+```
+## Error: object 'dat' not found
+```
+
+Here we have taken rows 1 through 10 and 20 through 30 and columns 1 through 3 and 7 through 8.
+
+
+```r
+dat[seq(1, 12, 3), seq(1, 8, 3)]
+```
+
+```
+## Error: object 'dat' not found
+```
+
+Here we have used the built-in function seq to take regularly spaced rows and columns.
+For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, and 7.
+(Again, we always include the lower bound, but stop when we reach or cross the upper bound.)
+
+__EXERCISES__
 
 1. If data holds our array of survey data, what does `data[3:3, 4:4]` produce?
 What about `data[3:3, 4:1]`? Explain the results to the person sitting next to you
@@ -519,10 +577,29 @@ What about `data[3:3, 4:1]`? Explain the results to the person sitting next to y
 Now that our data is in memory, we can start doing things with it.
 First, let's ask what type of thing data refers to:
 
-```{r}
+
+```r
 class(dat)
+```
+
+```
+## Error: object 'dat' not found
+```
+
+```r
 str(dat)
+```
+
+```
+## Error: object 'dat' not found
+```
+
+```r
 summary(dat)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 The class output tells us that data currently is a data.frame in R.
@@ -551,26 +628,55 @@ __Useful functions__
 
 We can see what its shape is like this:
 
-```{r}
+
+```r
 dim(dat)
+```
+
+```
+## Error: object 'dat' not found
+```
+
+```r
 nrow(dat)
+```
+
+```
+## Error: object 'dat' not found
+```
+
+```r
 ncol(dat)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 This tells us that data has 35549 rows and 8 columns.
 
 Let's look at the structure of the data again
 
-```{r}
+
+```r
 str(dat)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 If we look at 'plot' it says it's an integer.
  $ plot     : int  2 3 2 7 3 1 2 1 1 6
 and it is an integer, but in our case we want it to be a factor. Basically it's a category. We don't want to be able to do math with it. We want to be able to ask things about that category. So we're going to change it from an integer to a factor in our data frame.
 
-```{r}
+
+```r
 dat$plot <- as.factor(dat$plot)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 
@@ -587,27 +693,47 @@ how many of each species were caught.
 We can look at just one column at a time in different ways. We can reference that
 column by it's number
 
-```{r}
+
+```r
 # Look at the weight column, the 8th one
 dat[,8]
 ```
 
+```
+## Error: object 'dat' not found
+```
+
 or by its name
-```{r}
+
+```r
 # Look at the weight column, by its name wgt
 dat$wgt
 ```
 
+```
+## Error: object 'dat' not found
+```
+
 If you forget the column names, you can type
 
-```{r}
+
+```r
 colnames(dat)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 or
 
-```{r}
+
+```r
 str(dat)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 will show you the column names and the type of data in them
@@ -618,32 +744,57 @@ Factor w/ 48 levels means there are 48 different versions of that factor
 
 So, let's get a list of all the species. The 'unique' command tells us all the
 unique names in that column.
-```{r}
+
+```r
 unique(dat$species)
 ```
 
+```
+## Error: object 'dat' not found
+```
+
 Now let's see how many of each species we have
-```{r}
+
+```r
 table(dat$species)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 We could even assign it to a variable and make it a data frame to make it easier to look at
 
-```{r}
+
+```r
 species_table <- as.data.frame(table(dat$species))
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 Maybe we also want to see how many animals were captured in each plot
 
-```{r}
+
+```r
 table(dat$plot)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 Now we want to do some actual calculations with the data though. Let's calculate the average weight of all the animals. R has a lot of built in statistical functions, like mean, median, max, min
 
 
-```{r}
+
+```r
 mean(dat$wgt)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 Hmm, we just get NA. That's because we don't have the weight for every animal
@@ -655,38 +806,68 @@ How many animals would we omit. We can look at how many animals we have overall 
 Because data is in a vector, when we want to know how much of something we have
 we ask how long it is with the length() function.
 
-```{r}
+
+```r
 length(dat$wgt)
 ```
 
-```{r}
+```
+## Error: object 'dat' not found
+```
+
+
+```r
 length(na.omit(dat$wgt))
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 We can then subtract those numbers
 
-```{r}
+
+```r
 length(dat$wgt) - length(na.omit(dat$wgt))
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 We can see we'll be omitting 3266 animals. Bummer, but not terrible when we've sampled over 35,000 animals.
 
 Let's calculate their average weight
 
-```{r}
+
+```r
 mean(na.omit(dat$wgt))
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 It gets a little annoying to type na.omit(dat$wgt) each time we want to do the calculation, so we can actually create a new data frame with the rows that have
 NA omitted with the complete.cases() command. Don't worry too much about this. You can google it to learn more about it if you need to use it.
 
-```{r}
+
+```r
 dat2 <- dat[complete.cases(dat$wgt),]
 ```
 
+```
+## Error: object 'dat' not found
+```
 
-```{r}
+
+
+```r
 mean(dat2$wgt)
+```
+
+```
+## Error: object 'dat2' not found
 ```
 
 __EXERCISES__
@@ -694,6 +875,37 @@ __EXERCISES__
 R has a bunch of handy statistical functions built in. Calculate the median, standard deviation, minimum and maximum weight. For bonus points calculate the standard error.
 
 
+## Statistics on subsets of data
+
+When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.
+
+One way to do this is to select the data we want to create a new temporary array, using the subset() function
+
+Let's look at just the animals of species 'DO'
+
+
+```r
+speciesDO <- subset(dat, species == 'DO')
+```
+
+```
+## Error: object 'dat' not found
+```
+
+We could see in our table from before that 'DO' had 3027 species. Let's check to see if that's what we have by checking the number of rows
+
+
+```r
+nrow(speciesDO)
+```
+
+```
+## Error: object 'speciesDO' not found
+```
+
+__EXERCISE__
+
+Calculate the mean and standard deviation of just the DO species
 
 
 
@@ -705,7 +917,8 @@ As the diagram below shows, we want to perform the operation across an axis:
 To support this, in R we can use the `apply` or 'tapply' function:
 tapply() takes a vector, so we'll use that
 
-```{r}
+
+```r
 help(tapply) #or ?apply
 ```
 
@@ -718,14 +931,24 @@ The format is
 
 tapply(data_you_want_to_calculate, factor_to_sort_on, function)
 
-```{r}
+
+```r
 tapply(dat2$wgt, dat2$species, mean)
+```
+
+```
+## Error: object 'dat2' not found
 ```
 
 Now we can put all the means into a variable
 
-```{r}
+
+```r
 species_means <- tapply(dat2$wgt, dat2$species, mean)
+```
+
+```
+## Error: object 'dat2' not found
 ```
 
 We still get NAs. That's because of the way that R keeps track of NAs when
@@ -737,11 +960,37 @@ function, but we can use the aggregate function instead, which we'll cover next.
 2. Save these values to a varible.
 3. What is the length of your new variable?
 
-```{r}
+
+```r
 species_max <- tapply(dat2$wgt, dat2$species, max)
+```
+
+```
+## Error: object 'dat2' not found
+```
+
+```r
 species_min <- tapply(dat2$wgt, dat2$species, min)
+```
+
+```
+## Error: object 'dat2' not found
+```
+
+```r
 length(species_max)
+```
+
+```
+## Error: object 'species_max' not found
+```
+
+```r
 length(species_min)
+```
+
+```
+## Error: object 'species_min' not found
 ```
 
 
@@ -750,8 +999,13 @@ length(species_min)
 Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.
 
 
-```{r}
+
+```r
 d.summary = data.frame(species_means, species_min, species_max)
+```
+
+```
+## Error: object 'species_means' not found
 ```
 
 We can also do this with the aggregate function, which deals with the NA rows that we eliminated more nicely. This is a very useful function, and it puts the output in to a data frame rather than a list.
@@ -760,28 +1014,48 @@ If you look at documentation for aggregate() there's a few different ways to wri
 The format is
 aggregate(what-to-plot~what-you-want-it-sorted-by, data=the-dataset, function)
 
-```{r}
+
+```r
 mean_species <- aggregate(wgt~species, data=dat, mean)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 Maybe we want to look at the data average per species per plot
 
-```{r}
+
+```r
 aggregate(wgt~species+plot, data=dat, mean)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 Or we just want to look at the average of particular species in each plot. Then we can subset the data within the function
 
-```{r}
+
+```r
 aggregate(wgt~species+plot, data=subset(dat, species == "DO"), mean)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 __EXERCISES__
 
 1. Create a data frame with the standard deviation of weight for each species
 
-```{r}
+
+```r
 sd_species <- aggregate(wgt~species, data=dat, sd)
+```
+
+```
+## Error: object 'dat' not found
 ```
 
 
@@ -792,20 +1066,35 @@ Lets use the average species data that we saved and plot it.
 
 R has built in plotting functions
 
-```{r}
+
+```r
 barplot(mean_species$wgt, names.arg=mean_species$species)
+```
+
+```
+## Error: object 'mean_species' not found
 ```
 
 
 The axis labels are too big though, so you can't see them all. Let's change that
-```{r}
+
+```r
 barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4)
+```
+
+```
+## Error: object 'mean_species' not found
 ```
 
 and change the color
 
-```{r}
+
+```r
 barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c("blue"))
+```
+
+```
+## Error: object 'mean_species' not found
 ```
 
 
@@ -814,22 +1103,38 @@ __EXERCISES__
 1. Create a plot showing the standard deviation of the species data
 
 
-```{r}
+
+```r
 barplot(sd_species$wgt, names.arg=sd_species$species)
 ```
 
+```
+## Error: object 'sd_species' not found
+```
+
 2. Calculate the average weight by plot id
-```{r}
+
+```r
 plot_mean <- aggregate(wgt~plot, data=dat, mean)
 ```
 
+```
+## Error: object 'dat' not found
+```
+
 3. Plot the average weight by plot and make the bars red
-```{r}
+
+```r
 barplot(plot_mean$wgt, names.arg=plot_mean$species, col=c("red"))
 ```
 
+```
+## Error: object 'plot_mean' not found
+```
+
 There's lots of different ways to plot things. You can use
-```{r}
+
+```r
 help(barplot)
 ```
 or search online
@@ -846,9 +1151,17 @@ Be sure to add the 'dev.off()' command at the end.
 That command makes it so that the plots go back to getting printed within R.
 Otherwise every new plot you make will get printed to that pdf.
 
-````{r}
+
+```r
 pdf("R_plot.pdf")
 barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c("blue"))
+```
+
+```
+## Error: object 'mean_species' not found
+```
+
+```r
 dev.off()
 ```
 
@@ -863,7 +1176,8 @@ In RStudio, you can also do package management through Tools -> Install Packages
 Updating packages can sometimes make changes, so if you already have a lot of code in R, don't run this now. Otherwise let's just go ahead and update our pacakges so things are up to date.
 
 
-```{r, eval=FALSE}
+
+```r
 update.packages(ask = FALSE)
 ```
 

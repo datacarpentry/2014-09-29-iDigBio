@@ -1,0 +1,2 @@
+
+* [The R cookbook](http://www.cookbook-r.com/)
