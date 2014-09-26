@@ -483,15 +483,7 @@ in square brackets, just as we do in math. For instance:
 
 
 ```r
-animals <- c("mouse", "rat", "dog")
-animals[1]
-```
-
-```
-## [1] "mouse"
-```
-
-```r
+animals <- c("mouse", "rat", "dog", "cat")
 animals[2]
 ```
 
@@ -500,11 +492,27 @@ animals[2]
 ```
 
 ```r
-animals[3]
+animals[c(3, 2)]
 ```
 
 ```
-## [1] "dog"
+## [1] "dog" "rat"
+```
+
+```r
+animals[2:4]
+```
+
+```
+## [1] "rat" "dog" "cat"
+```
+
+```r
+animals[c(1:3, 2:4)]
+```
+
+```
+## [1] "mouse" "rat"   "dog"   "rat"   "dog"   "cat"
 ```
 
 R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start
@@ -512,61 +520,78 @@ counting at 1, because that's what human beings have done for thousands of
 years.  Languages in the C family (including C++, Java, Perl, and Python) count
 from 0 because that's simpler for computers to do.
 
-
-
-An index like [3, 2] selects a single element of an array,
-but we can select whole sections as well.
-For example, we can select the month, day and year (columns) of values
-for the first four (rows) animals like this:
+`:` is a special function that creates numeric vectors of integer in increasing
+or decreasing order, test `1:10` and `10:1` for instance. The function `seq()`
+(for sequence) can create more complex patterns:
 
 
 ```r
-dat[1:4, 1:3]
+seq(1, 10, by=2)
+seq(1, 10, length.out=4)
+seq(1, by=5, length.out=100)
+seq(1, 8, by=3) # sequence stops to stay below upper limit
+```
+
+Our survey data is has rows and columns, if we want to extract some specific
+data from it, we need to specify the "coordinates" we want from it. Row numbers
+come first, followed by column numbers.
+
+
+```r
+surveys[1, 1]   # first element in the first column of the data frame
+surveys[1, 6]   # first element in the 6th column
+surveys[1:3, 7] # first three elements in the 7th column
+surveys[3, ]    # the 3rd elements for all columns
+surveys[, 8]    # the entire 8th column
+head_surveys <- surveys[1:6, ] # surveys[1:6, ] is equivalent to head(surveys)
+```
+
+### Exercices
+
+1. The function `nrow()` on a `data.frame` returns the number of rows. Use it,
+   in conjuction with `seq()` to create a new `data.frame` called
+   `surveys_by_10` that includes every 10th row of the survey data frame
+   starting at row 10 (10, 20, 30, ...)
+
+<!---
+
+```r
+surveys_by_10 <- surveys[seq(10, nrow(surveys), by=10), ]
+```
+--->
+
+## Statistics on subsets of data
+
+When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.
+
+One way to do this is to select the data we want to create a new temporary array, using the subset() function
+
+Let's look at just the animals of species 'DO'
+
+
+```r
+speciesDO <- subset(dat, species == 'DO')
 ```
 
 ```
 ## Error: object 'dat' not found
 ```
 
-The slice 1:4 means, "Start at index 1 and go to index 4."
-We don't have to start slices at 0:
+We could see in our table from before that 'DO' had 3027 species. Let's check to see if that's what we have by checking the number of rows
 
 
 ```r
-dat[5:10, 0:3]
+nrow(speciesDO)
 ```
 
 ```
-## Error: object 'dat' not found
+## Error: object 'speciesDO' not found
 ```
 
-and we don't have to take all the values in the slice, we can use `c()` to select certain values or groups of values:
+__EXERCISE__
 
+Calculate the mean and standard deviation of just the DO species
 
-```r
-dat[c(1:10, 20:30), c(1:3, 7:8)]
-```
-
-```
-## Error: object 'dat' not found
-```
-
-Here we have taken rows 1 through 10 and 20 through 30 and columns 1 through 3 and 7 through 8.
-
-
-```r
-dat[seq(1, 12, 3), seq(1, 8, 3)]
-```
-
-```
-## Error: object 'dat' not found
-```
-
-Here we have used the built-in function seq to take regularly spaced rows and columns.
-For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, and 7.
-(Again, we always include the lower bound, but stop when we reach or cross the upper bound.)
-
-__EXERCISES__
 
 1. If data holds our array of survey data, what does `data[3:3, 4:4]` produce?
 What about `data[3:3, 4:1]`? Explain the results to the person sitting next to you
@@ -875,37 +900,6 @@ __EXERCISES__
 R has a bunch of handy statistical functions built in. Calculate the median, standard deviation, minimum and maximum weight. For bonus points calculate the standard error.
 
 
-## Statistics on subsets of data
-
-When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.
-
-One way to do this is to select the data we want to create a new temporary array, using the subset() function
-
-Let's look at just the animals of species 'DO'
-
-
-```r
-speciesDO <- subset(dat, species == 'DO')
-```
-
-```
-## Error: object 'dat' not found
-```
-
-We could see in our table from before that 'DO' had 3027 species. Let's check to see if that's what we have by checking the number of rows
-
-
-```r
-nrow(speciesDO)
-```
-
-```
-## Error: object 'speciesDO' not found
-```
-
-__EXERCISE__
-
-Calculate the mean and standard deviation of just the DO species
 
 
 
