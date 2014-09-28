@@ -4,7 +4,7 @@ library(knitr)
 opts_chunk$set(results='hide')
 ```
 
-# Data Carpentry R materials
+# Data Carpentry R materials - Before we start
 
 --------------------------------------------------
 
