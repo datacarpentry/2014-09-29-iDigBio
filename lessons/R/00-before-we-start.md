@@ -1,8 +1,5 @@
 
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(results='hide')
-```
+
 
 # Data Carpentry R materials
 
@@ -118,20 +115,23 @@ generate.
 
 If you need help with a specific function, let's say `barplot()`, you can type:
 
-```{r, eval=FALSE}
+
+```r
 ?barplot
 ```
 
 If you just need to remind yourself of the names of the arguments, you can use:
 
-```{r, eval=FALSE}
+
+```r
 args(lm)
 ```
 
 If the function is part of a package that is installed on your computer but
 don't remember which one, you can type
 
-```{r, eval=FALSE}
+
+```r
 ??read.dna
 ```
 
@@ -140,7 +140,8 @@ don't remember which one, you can type
 If you are looking for a function to do a particular task, you can use
 `help.search()` (but only looks through the installed packages):
 
-```{r, eval=FALSE}
+
+```r
 help.search("kruskal")
 ```
 
@@ -189,8 +190,19 @@ To share an object with someone else, if it's relatively small, you can use the
 function `dput()`, it will output R code that can be used to recreate the exact same
 object as the one in memory:
 
-```{r, results='show'}
+
+```r
 dput(head(iris)) # iris is an example data.frame that comes with R
+```
+
+```
+## structure(list(Sepal.Length = c(5.1, 4.9, 4.7, 4.6, 5, 5.4), 
+##     Sepal.Width = c(3.5, 3, 3.2, 3.1, 3.6, 3.9), Petal.Length = c(1.4, 
+##     1.4, 1.3, 1.5, 1.4, 1.7), Petal.Width = c(0.2, 0.2, 0.2, 
+##     0.2, 0.2, 0.4), Species = structure(c(1L, 1L, 1L, 1L, 1L, 
+##     1L), .Label = c("setosa", "versicolor", "virginica"), class = "factor")), .Names = c("Sepal.Length", 
+## "Sepal.Width", "Petal.Length", "Petal.Width", "Species"), row.names = c(NA, 
+## 6L), class = "data.frame")
 ```
 
 If the object is larger, provide either the raw file (i.e., your CSV file) with
@@ -198,7 +210,8 @@ your script up to the point of the error (and after removing everything that is
 not relevant to your issue). Alternatively, in particular if your questions is
 not related to a `data.frame`, you can save any R object to a file:
 
-```{r, eval=FALSE}
+
+```r
 saveRDS(iris, file="/tmp/iris.rds")
 ```
 
@@ -206,7 +219,8 @@ The content of this file is however not human readable and cannot be posted
 directly on stackoverflow. It can how be sent to someone by email who can read
 it with this command:
 
-```{r, eval=FALSE}
+
+```r
 some_data <- readRDS(file="~/Downloads/iris.rds")
 ```
 
@@ -215,8 +229,33 @@ as it provides critical information about your platform, the versions of R and
 the packages that you are using, and other information that can be very helpful
 to understand your problem.
 
-```{r, results='show'}
+
+```r
 sessionInfo()
+```
+
+```
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] grid      stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
+## 
+## other attached packages:
+## [1] knitr_1.6      devtools_1.6   fortunes_1.5-2
+## 
+## loaded via a namespace (and not attached):
+## [1] compiler_3.1.1 evaluate_0.5.5 formatR_1.0    markdown_0.7.4
+## [5] mime_0.1.2     stringr_0.6.2  tools_3.1.1
 ```
 
 ### Where to ask for help?
