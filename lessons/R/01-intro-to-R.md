@@ -1,7 +1,4 @@
-```{r, echo=FALSE}
-library(knitr)
-opts_chunk$set(results='hide')
-```
+
 
 # Data Carpentry R materials -- Introduction to R
 
@@ -35,7 +32,8 @@ _Start by showing an example of a script_
 
 You can get output from R simply by typing in math in the console
 
-```{r}
+
+```r
 3 + 5
 12/7
 ```
@@ -44,7 +42,8 @@ However, to do useful and interesting things, we need to assign _values_ to
 _objects_. To create objects, we need to give it a name followed by the
 assignment operator `<-` and the value we want to give it:
 
-```{r}
+
+```r
 weight_kg <- 55
 ```
 
@@ -64,7 +63,8 @@ use nouns for variable names, and verbs for function names.
 When assigning a value to an object, R does not print anything. You can force to
 print the value by using parentheses or by typing the name:
 
-```{r}
+
+```r
 (weight_kg <- 55)
 weight_kg
 ```
@@ -73,14 +73,16 @@ Now that R has `weight_kg` in memory, we can do arithmetic with it. For
 instance, we may want to convert this weight in pounds (weight in pounds is 2.2
 times the weight in kg):
 
-```{r}
+
+```r
 2.2 * weight_kg
 ```
 
 We can also change a variable's value by assigning it a new one:
 
 
-```{r}
+
+```r
 weight_kg <- 57.5
 2.2 * weight_kg
 ```
@@ -89,13 +91,15 @@ This means that assigning a value to one variable does not change the values of
 other variables.  For example, let's store the animal's weight in pounds in a
 variable.
 
-```{r}
+
+```r
 weight_lb <- 2.2 * weight_kg
 ```
 
 and then change `weight_kg` to 100.
 
-```{r}
+
+```r
 weight_kg <- 100
 ```
 
@@ -105,7 +109,8 @@ What do you think is the current content of the object `weight_lb`? 126.5 or 200
 
 What are the values after each statement in the following?
 
-```{r}
+
+```r
 mass <- 47.5           # mass?
 age  <- 122            # age?
 mass <- mass * 2.0     # mass?
@@ -120,14 +125,16 @@ the workhorse of R. It's a group of values, mainly either numbers or
 characters. You can assign this list of values to a variable, just like you
 would for one item. For example we can create a vector of animal weights:
 
-```{r}
+
+```r
 weights <- c(50, 60, 65, 82)
 weights
 ```
 
 A vector can also contain characters:
 
-```{r}
+
+```r
 animals <- c("mouse", "rat", "dog")
 animals
 ```
@@ -135,14 +142,16 @@ animals
 There are many functions that allow you to inspect the content of a
 vector. `length()` tells you how many elements are in a particular vector:
 
-```{r}
+
+```r
 length(weights)
 length(animals)
 ```
 
 `class()` indicates the class (the type of element) of an object:
 
-```{r}
+
+```r
 class(weights)
 class(animals)
 ```
@@ -151,14 +160,16 @@ The function `str()` provides an overview of the object and the elements it
 contains. It is a really useful function when working with large and complex
 objects:
 
-```{r}
+
+```r
 str(weights)
 str(animals)
 ```
 
 You can add elements to your vector simply by using the `c()` function:
 
-```{r}
+
+```r
 weights <- c(weights, 90) # adding at the end
 weights <- c(30, weights) # adding at the beginning
 weights
@@ -198,7 +209,8 @@ Once created factors can only contain a pre-defined set values, known as
 *levels*. By default, R always sorts *levels* in alphabetical order. For
 instance, if you have a factor with 2 levels:
 
-```{r}
+
+```r
 sex <- factor(c("male", "female", "female", "male"))
 ```
 
@@ -207,7 +219,8 @@ R will assign `1` to the level `"female"` and `2` to the level `"male"` (because
 `"male"`). You can check this by using the function `levels()`, and check the
 number of levels using `nlevels()`:
 
-```{r}
+
+```r
 levels(sex)
 nlevels(sex)
 ```
@@ -216,7 +229,8 @@ Sometimes, the order of the factors does not matter, other times you might want
 factors to be ordered, because the order is meaningful (e.g., low, medium,
 high), or it is required by a particular type of analysis.
 
-```{r}
+
+```r
 food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
 levels(food)
 food <- factor(food, levels=c("low", "medium", "high"), ordered=TRUE)
@@ -238,7 +252,8 @@ If you need to convert a factor to a character vector, simply use
 Converting a factor to a numeric vector is however a little trickier, and you
 have to go via a character vector. Compare:
 
-```{r}
+
+```r
 f <- factor(c(1, 5, 10, 2))
 as.numeric(f) ## wrong! and there is no warning...
 as.numeric(as.character(f))
@@ -249,19 +264,34 @@ as.numeric(as.character(f))
 The function `table()` tabulates observations and can be used to create
 bar plots quickly. For instance:
 
-```{r, results='show'}
+
+```r
 exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
                    "control", "treat1", "treat2", "control", "treat3", "control"))
 table(exprmt)
+```
+
+```
+## exprmt
+## control  treat1  treat2  treat3 
+##       4       4       2       2
+```
+
+```r
 barplot(table(exprmt))
 ```
+
+![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
 
 **Question** How can you recreate this plot but by having "control" being listed
 last instead of first?
 
 <!---
-```{r}
+
+```r
 exprmt <- factor(exprmt, levels=c("treat1", "treat2", "treat3", "control"))
 barplot(table(exprmt))
 ```
+
+![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
 --->
