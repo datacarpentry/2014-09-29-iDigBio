@@ -1,307 +1,10 @@
 
 
-# Data Carpentry R materials
+# Data Carpentry R materials - Starting with data
 
 --------------------------------------------------
 
-# Motivations for this lesson
-
-* Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.
-* A lot of scientific code is NOT reproducible.
-* If you keep a lab notebook, why are we not as careful with our code.
-* We edit each others manuscripts, but we don't edit each other's code.
-* If you write your code with "future you" in mind, you will save yourself and others a lot of time.
-
-# Presentation of RStudio
-
-Let's start by learning about our tool.
-
-_Point out the different windows in R._
-
-* Console, Scripts, Environments, Plots
-* Avoid using shortcuts.
-* Code and workflow is more reproducible if we can document everything that we do.
-* Our end goal is not just to "do stuff" but to do it in a way that anyone can easily and exactly replicate our workflow and results.
-
-# Before we get started
-
-* Start RStudio (presentation of RStudio -above- should happen here)
-* Under the `File` menu, click on `New project`, choose `New directory`, then
-  `Empty project`
-* Enter a name for this new folder, and choose a convenient location for
-  it. This will be your **working directory** for the rest of the day
-  (e.g., `~/data-carpentry`)
-* Click on "Create project"
-* Under the `Files` tab on the right of the screen, click on `New Folder` and
-  create a folder named `data` within your newly created working directory.
-  (e.g., `~/data-carpentry/data`)
-* Create a new R script (File > New File > R script) and save it in your working
-  directory (e.g. `data-carpentry-script.R`)
-
-Your working directory should now look like this:
-
-![How it should look like at the beginning of this lesson](../../img/r_starting_how_it_should_like.png)
-
-# Basics of R
-
-R is a versatile, open source programming/scripting language that's useful both for statistics but also data science. Inspired by the programming language S.
-
-* Open source software under GPL.
-* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.
-* Available on all platforms.
-* Not just for statistics, but also general purpose programming.
-* Is object oriented and functional.
-* Large and growing community of peers.
-
-## Commenting
-
-Use `#` signs to comment. Comment liberally in your R scripts. Anything to the right of a `#` is ignored by R.
-
-## Assignment operator
-
-`<-` is the assignment operator. Assigns values on the right to objects on the left. Mostly similar to `=` but not always. Learn to use `<-` as it is good programming practice. Using `=` in place of `<-` can lead to issues down the line.
-
-`=` should only be used to specify the values of arguments in functions for instance `read.csv(file="data/some_data.csv")`.
-
-## Good practices
-
-There are two main ways of interacting with R: using the console or by using script files (plain text files that contain your code).
-
-The recommended approach when working on a data analysis project is dubbed "the source code is real". The objects you are creating should be seen as disposable as they are the direct realization of your code. Every object in your analysis can be recreated from your code, and all steps are documented. Therefore, it is best to enter as little commands as possible in the R console. Instead, all code should be written in script files, and evaluated from there. The R console should be used to inspect objects, test a function or get help. With this approach, the `.Rhistory` file automatically created during your session should not be very useful.
-
-Similarly, you should separate the original data (raw data) from intermediate datasets that you may create for the need of a particular analysis. For instance, you may want to create a `data/` directory within your working directory that stores the raw data, and have a `data_output/` directory for intermediate datasets and a `figure_output/` directory for the plots you will generate.
-
-
-# Introduction to R
-
-## Objectives
-* Familiarize participants with R syntax
-* Understand the concept of objects and assignment
-* Understand the concept of vector and data types
-* Understand how factors work
-* Get exposed to a few functions
-
-## The R syntax
-
-_Start by showing an example of a script_
-* Point to the different parts:
-  - a function
-  - the assignment operator `<-`
-  - the `=` for arguments
-  - the comments `#` and how they are used to document function and its content
-  - the `$` operator
-* Point to identation and consistency in spacing to improve clarity
-
-![Example of a simple R script](../../img/r_starting_example_script.png)
-
-## Creating objects
-
-You can get output from R simply by typing in math in the console
-
-
-```r
-3 + 5
-12/7
-```
-
-However, to do useful and interesting things, we need to assign _values_ to _objects_. To create objects, we need to give it a name followed by the assignment operator `<-` and the value we want to give it:
-
-
-```r
-weight_kg <- 55
-```
-
-Objects can be given any name such as `x`, `current_temperature`, or `subject_id`. You want your object names to be explicit and not too long. They cannot start with a number (`2x` is not valid but `x2` is). There are some names that cannot be used because they represent the names of fundamental functions in R (e.g., `if`, `else`, `for`, see [here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) for a complete list). In general, even if it's allowed, it's best to not use other function names (e.g., `c`, `T`, `mean`, `data`, `df`, `weights`), in doubt check the help to see if the name is already in use. It's also best to avoid `.` as in `my.dataset`. It is also recommended to use nouns for variable names, and verbs for function names.
-
-When assigning a value to an object, R does not print anything. You can force to print the value by using parentheses or by typing the name:
-
-
-```r
-(weight_kg <- 55)
-weight_kg
-```
-
-Now that R has `weight_kg` in memory, we can do arithmetic with it. For instance, we may want to convert this weight in pounds (weight in pounds is 2.2 times the weight in kg):
-
-
-```r
-2.2 * weight_kg
-```
-
-We can also change a variable's value by assigning it a new one:
-
-
-
-```r
-weight_kg <- 57.5
-2.2 * weight_kg
-```
-
-This means that assigning a value to one variable does not change the values of other variables.  For example, let's store the animal's weight in pounds in a variable.
-
-
-```r
-weight_lb <- 2.2 * weight_kg
-```
-
-and then change `weight_kg` to 100.
-
-
-```r
-weight_kg <- 100
-```
-
-What do you think is the current content of the object `weight_lb`? 126.5 or 200?
-
-### Exercise
-
-What are the values after each statement in the following?
-
-
-```r
-mass <- 47.5          # mass?
-age  <- 122           # age?
-mass <- mass * 2.0    # mass?
-age  <- age - 20      # age?
-massIndex <- mass/age # massIndex?
-```
-
-## Vectors and data types
-
-A vector is the most common and basic data structure in R, and is pretty much the workhorse of R. It's a group of values, mainly either numbers or characters. You can assign this list of values to a variable, just like you would for one item. For example we can create a vector of animal weights:
-
-
-```r
-weights <- c(50, 60, 65, 82)
-weights
-```
-
-A vector can also contain characters:
-
-
-```r
-animals <- c("mouse", "rat", "dog")
-animals
-```
-
-There are many functions that allow you to inspect the content of a vector. `length()` tells you how many elements are in a particular vector:
-
-
-```r
-length(weights)
-length(animals)
-```
-
-`class()` indicates the class (the type of element) of an object:
-
-
-```r
-class(weights)
-class(animals)
-```
-
-The function `str()` provides an overview of the object and the elements it contains. It is a really useful function when working with large and complex objects:
-
-
-```r
-str(weights)
-str(animals)
-```
-
-You can add elements to your vector simply by using the `c()` function:
-
-
-```r
-weights <- c(weights, 90) # adding at the end
-weights <- c(30, weights) # adding at the beginning
-weights
-```
-
-What happens here is that we take the original vector `weights`, and we are adding another item first to the end of the other ones, and then another item at the beginning. We can do this over and over again to build a vector or a dataset. As we program, this may be useful to autoupdate results that we are collecting or calculating.
-
-We just saw 2 of the 6 **data types** that R uses: `"character"` and `"numeric"`. The other 4 are:
-* `"complex"` to represent complex numbers with real and imaginary parts (e.g., `1+4i`) and that's all we're going to say about them
-* `"raw"` that we won't discuss further
-* `"logical"` for `TRUE` and `FALSE` (the boolean data type)
-* `"integer"` for integer numbers (e.g., `2L`, the `L` indicates to R that it's an integer)
-
-Vectors are one of the many **data structures** that are part of R. Other important ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`) and factors (`factor`). We will talk about `data.frame` soon but first we need to talk about `factor`.
-
-### Factors
-
-Factors are special vectors that represent categorical data. Factors can be ordered or unordered and are important for statistical analysis and for plotting.
-
-Factors are stored as integers that have labels associated the unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.
-
-Once created factors can only contain a pre-defined set values, known as *levels*. By default, R always sorts *levels* in alphabetical order, so if you have a factor with 2 levels, for instance
-
-
-```r
-sex <- factor(c("male", "female", "female", "male"))
-```
-
-R will assign `1` to the level `"female"` and `2` to the level `"male"` (because `f` comes before `m`). You can check this by using the function `levels()`, and check the number of levels using `nlevels()`:
-
-
-```r
-levels(sex)
-nlevels(sex)
-```
-
-Sometimes, the order of the factors does not matter, other times you might want factors to be ordered (or ranked), because the order is meaningful or it is required by a particular type of analysis (e.g., low, medium, high).
-
-
-```r
-food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
-levels(food)
-food <- factor(food, levels=c("low", "medium", "high"), ordered=TRUE)
-levels(food)
-```
-
-In R's memory, these vectors of factors are represented by numbers 1, 2, 3. They are better than using simple integer labels because factors are what are called self describing: `"male"` and `"female"`" is more descriptive than `1`s and `2`s. Which is male? `1` or `2`? You wouldn't be able to tell with just integer data. Factors have this information built in. It is particularly helpful when there are many levels (like the species in our example data set), or when there is no additional metadata (for simple datasets, real datasets always have metadata, right?)
-
-If you need to convert a factor to a character vector, simply use `as.character(x)`.
-
-Converting a factor to a numeric vector is however a little trickier, and you have to go via a character vector. Compare:
-
-
-```r
-f <- factor(c(1,5,10,2))
-as.numeric(f) ## wrong! and there will be no warnings...
-as.numeric(as.character(f))
-```
-
-### Exercise
-
-The function `table()` tabulates observations and can be used to create
-bar plots quickly. For instance:
-
-
-```r
-exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
-                   "control", "treat1", "treat2", "control", "treat3", "control"))
-table(exprmt)
-barplot(table(exprmt))
-```
-
-![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
-
-**Question** How can you recreate this plot but by having "control" being listed
-last instead of first?
-
-<!---
-
-```r
-exprmt <- factor(exprmt, levels=c("treat1", "treat2", "treat3", "control"))
-barplot(table(exprmt))
-```
-
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
---->
-
-# Importing the survey data
-
-## Objectives
+# Objectives
 
 We want to:
 * load external data (CSV files) in memory using the survey table (`surveys.csv`) as an example
@@ -309,14 +12,16 @@ We want to:
   - understand the concept of a `data.frame`
   - understand the concept of `NA`
   - know how to access any element of a `data.frame`
+* being able to subset for a level
+* being able to extract particular values from a `data.frame`
+* being able to add/remove columns and rows
 * being able to generate summary statistics from the data
-* calculate the average weight of the animals across all animals
+* calculate basic statistics across a levels of a factor (here species)
 * generate plot from the data using the average weights of the animals as an example
 
-To do all that, we'll have to learn a little bit about programming.
+----------------------------------------------------
 
-
-## Presentation of the Survey Data
+# Presentation of the Survey Data
 
 We are studying the species and weight of animals caught in plots in our study
 area.  The dataset is stored as a `.csv` file: each row holds information for a
@@ -335,10 +40,12 @@ The first few rows of the survey dataset look like this:
     "0d17daf5-df94-475a-b57f-8aea2477cee3","8","19","1977","a7498949-7b94-4f8e-b253-3e26bbf80710","DM","M","36"
 
 
-To load our survey data, we need to locate the `surveys.csv` file. We will use `setwd()` to tell R to __set__ our __w__orking __d__irectory, in other words where to look for files and save outputs, and `read.csv()` to load into memory (as a `data.frame`) the content of the CSV file.
+To load our survey data, we need to locate the `surveys.csv` file. We will use
+`read.csv()` to load into memory (as a `data.frame`) the content of the CSV
+file.
 
 * [download the data file](https://github.com/datacarpentry/2014-09-29-iDigBio/raw/master/data/biology/surveys.csv)
-* put it in directory "data" of your working directory for these exercises
+* put it in directory "data" within your working directory for these exercises
 
 
 
@@ -346,10 +53,10 @@ To load our survey data, we need to locate the `surveys.csv` file. We will use `
 surveys <- read.csv('data/surveys.csv')
 ```
 
+<!--- this chunk if for internal use so code in this lesson can be evaluated --->
 
 
 This statement doesn't produce any output because assignment doesn't display anything. If we want to check that our data has been loaded, we can print the variable's value:
-
 
 ```r
 surveys
@@ -399,13 +106,15 @@ Based on the output of `str(surveys)`, can you answer the following questions?
 * How many species have been recorded during these surveys?
 
 
-## About `data.frame`
+# About the `data.frame` class
 
 `data.frame` is the _de facto_ data structure for most tabular data and what we
-use for statistics and plotting. They are a collection of vectors of identical
-lengths (each representing a column), and each vector can be of a different data
-type (e.g., characters, integers, factors). The `str()` function is useful to
-inspect the data types of the columns.
+use for statistics and plotting.
+
+`data.frame` are a collection of vectors of identical lengths. Each vector
+represents a column, and each vector can be of a different data type (e.g.,
+characters, integers, factors). The `str()` function is useful to inspect the
+data types of the columns.
 
 <!---
 Data frames can have additional attributes such as `rownames()`, which can be
@@ -420,7 +129,7 @@ By default, `data.frame` converts (= coerces) columns that contain characters
 (i.e., text) into the `factor` data type. Depending on what you want to do with
 the data, you may want to keep these columns as `character`. To do so,
 `read.csv()` and `read.table()` have an argument called `stringsAsFactors` which
-you can set to `FALSE`:
+can be set to `FALSE`:
 
 
 ```r
@@ -433,31 +142,59 @@ You can also create `data.frame` manually with the function `data.frame()`. This
 function can also take the argument `stringsAsFactors`. Compare the output of
 these examples:
 
-__Point to the difference between character and factor output with str()__
-
 
 ```r
 example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
                            feel=c("furry", "furry", "squishy", "spiny"),
                            weight=c(45, 8, 1.1, 0.8))
 str(example_data)
+```
+
+```
+## 'data.frame':	4 obs. of  3 variables:
+##  $ animal: Factor w/ 4 levels "cat","dog","sea cucumber",..: 2 1 3 4
+##  $ feel  : Factor w/ 3 levels "furry","spiny",..: 1 1 3 2
+##  $ weight: num  45 8 1.1 0.8
+```
+
+```r
 example_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
                            feel=c("furry", "furry", "squishy", "spiny"),
                            weight=c(45, 8, 1.1, 0.8), stringsAsFactors=FALSE)
 str(example_data)
 ```
 
+```
+## 'data.frame':	4 obs. of  3 variables:
+##  $ animal: chr  "dog" "cat" "sea cucumber" "sea urchin"
+##  $ feel  : chr  "furry" "furry" "squishy" "spiny"
+##  $ weight: num  45 8 1.1 0.8
+```
+
+__Point to the differences between character and factor output with str()__
+
+
 ### Exercises
+
+1. There are a few mistakes in this hand crafted `data.frame`, can you spot and
+   fix them? Don't hesitate to experiment!
+
+   
+   ```r
+    author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
+                              author_last=c(Darwin, Mayr, Dobzhansky),
+                              year=c(1942, 1970))
+   ```
 
 1. Can you predict the class for each of the columns in the following example?
 
    
    ```r
-    country_climate <- data.frame(country=c("Canada", "Panama", "South Africa", "Australia"),
-                                     climate=c("cold", "hot", "temperate", "hot/temperate"),
-                                     temperature=c(10, 30, 18, "15"),
-                                     north_hemisphere=c(TRUE, TRUE, FALSE, FALSE),
-                                     has_placentals=c(TRUE, TRUE, TRUE, "FALSE"))
+   country_climate <- data.frame(country=c("Canada", "Panama", "South Africa", "Australia"),
+                                  climate=c("cold", "hot", "temperate", "hot/temperate"),
+                                  temperature=c(10, 30, 18, "15"),
+                                  north_hemisphere=c(TRUE, TRUE, FALSE, "FALSE"),
+                                  has_kangaroo=c(FALSE, FALSE, FALSE, 1))
    ```
 
    Check your gueses using `str(country_climate)`. Are they what you expected?
@@ -466,20 +203,38 @@ str(example_data)
    R coerces (when possible) to the data type that is the least common
    denominator and the easiest to coerce to.
 
-1. There are a few mistakes in this hand crafted `data.frame`, can you spot and
-   fix them? Don't hesitate to experiment!
 
-   
-   ```r
-    author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                                 author_last=c(Darwin, Mayr, Dobzhansky),
-                                 year=c(1942, 1970))
-   ```
 
-## Indexing
+## Inspecting `data.frame` objects
 
-If we want to get a single value from the data frame, we must provide an index
-in square brackets, just as we do in math. For instance:
+We already saw how the functions `head()` and `str()` can be useful to check the
+content and the structure of a `data.frame`. Here is a non-exhaustive list of
+functions to get a sense of the content/structure of the data.
+
+* Size:
+	* `dim()` - returns a vector with the number of rows in the first element, and
+	  the number of columns as the second element (the __dim__ensions of the object)
+	* `nrow()` - returns the number of rows
+	* `ncol()` - returns the number of columns
+* Content:
+	* `head()` - shows the first 6 rows
+	* `tail()` - shows the last 6 rows
+* Names:
+	* `names()` - returns the column names (synonym of `colnames()` for `data.frame`
+	objects)
+	* `rownames()` - returns the row names
+* Summary:
+	* `str()` - structure of the object and information about the class, length and
+	content of  each column
+	* `summary()` - summary statistics for each column
+
+Note: most of these functions are "generic", they can be used on other types of
+objects besides `data.frame`.
+
+## Indexing and sequences
+
+If we want to extract one or several values from a vector, we must provide one
+or several indices in square brackets, just as we do in math. For instance:
 
 
 ```r
@@ -508,40 +263,66 @@ animals[2:4]
 ```
 
 ```r
-animals[c(1:3, 2:4)]
+more_animals <- animals[c(1:3, 2:4)]
+more_animals
 ```
 
 ```
 ## [1] "mouse" "rat"   "dog"   "rat"   "dog"   "cat"
 ```
 
-R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start
+R indexes start at 1. Programming languages like Fortran, MATLAB, and R start
 counting at 1, because that's what human beings have done for thousands of
 years.  Languages in the C family (including C++, Java, Perl, and Python) count
 from 0 because that's simpler for computers to do.
 
 `:` is a special function that creates numeric vectors of integer in increasing
 or decreasing order, test `1:10` and `10:1` for instance. The function `seq()`
-(for sequence) can create more complex patterns:
+(for __seq__uence) can be used to create more complex patterns:
 
 
 ```r
 seq(1, 10, by=2)
-seq(1, 10, length.out=4)
-seq(1, by=5, length.out=100)
+```
+
+```
+## [1] 1 3 5 7 9
+```
+
+```r
+seq(5, 10, length.out=3)
+```
+
+```
+## [1]  5.0  7.5 10.0
+```
+
+```r
+seq(50, by=5, length.out=10)
+```
+
+```
+##  [1] 50 55 60 65 70 75 80 85 90 95
+```
+
+```r
 seq(1, 8, by=3) # sequence stops to stay below upper limit
 ```
 
-Our survey data is has rows and columns, if we want to extract some specific
-data from it, we need to specify the "coordinates" we want from it. Row numbers
-come first, followed by column numbers.
+```
+## [1] 1 4 7
+```
+
+Our survey data frame has rows and columns (it has 2 dimensions), if we want to
+extract some specific data from it, we need to specify the "coordinates" we want
+from it. Row numbers come first, followed by column numbers.
 
 
 ```r
 surveys[1, 1]   # first element in the first column of the data frame
 surveys[1, 6]   # first element in the 6th column
 surveys[1:3, 7] # first three elements in the 7th column
-surveys[3, ]    # the 3rd elements for all columns
+surveys[3, ]    # the 3rd element for all columns
 surveys[, 8]    # the entire 8th column
 head_surveys <- surveys[1:6, ] # surveys[1:6, ] is equivalent to head(surveys)
 ```
@@ -560,655 +341,357 @@ surveys_by_10 <- surveys[seq(10, nrow(surveys), by=10), ]
 ```
 --->
 
-## Statistics on subsets of data
+# Manipulating data
 
-When analyzing data, though, we often want to look at partial statistics, such as the maximum value per species or the average value per plot.
+## Subsetting data
 
-One way to do this is to select the data we want to create a new temporary array, using the subset() function
+In particular for larger datasets, it can be tricky to remember the column
+number that corresponds to a particular variable. (Are species names in column 5
+or 7? oh, right... they are in column 6). In some cases, in which column the
+variable will be can change if the script you are using adds or removes
+columns. It's therefore often better to use column names to refer to a
+particular variable, and it makes your code easier to read and your intentions
+clearer.
 
-Let's look at just the animals of species 'DO'
+You can do operations on a particular column, by selecting it using the `$`
+sign. In this case, the entire column is a vector. For instance, to extract all
+the weights from our datasets, we can use: `surveys$wgt`. You can use
+`names(surveys)` or `colnames(surveys)` to remind yourself of the column names.
 
+In some cases, you may way to select more than one column. You can do this using
+the square brackets: `surveys[, c("wgt", "sex")]`.
 
-```r
-speciesDO <- subset(dat, species == 'DO')
-```
+When analyzing data, though, we often want to look at partial statistics, such
+as the maximum value of a variable per species or the average value per plot.
 
-```
-## Error: object 'dat' not found
-```
-
-We could see in our table from before that 'DO' had 3027 species. Let's check to see if that's what we have by checking the number of rows
-
-
-```r
-nrow(speciesDO)
-```
-
-```
-## Error: object 'speciesDO' not found
-```
-
-__EXERCISE__
-
-Calculate the mean and standard deviation of just the DO species
-
-
-1. If data holds our array of survey data, what does `data[3:3, 4:4]` produce?
-What about `data[3:3, 4:1]`? Explain the results to the person sitting next to you
-
-
-## Manipulating Data
-
-Now that our data is in memory, we can start doing things with it.
-First, let's ask what type of thing data refers to:
+One way to do this is to select the data we want, and create a new temporary
+array, using the `subset()` function. For instance, if we just want to look at
+the animals of the species "DO":
 
 
 ```r
-class(dat)
+surveys_DO <- subset(surveys, species == "DO")
 ```
 
-```
-## Error: object 'dat' not found
-```
+### Exercises
 
-```r
-str(dat)
-```
+1. What does the following do?
 
-```
-## Error: object 'dat' not found
-```
+  
+  ```r
+  surveys_DO$month[2] <- 8
+  ```
 
-```r
-summary(dat)
-```
+1. Use the function `subset` twice to create a `data.frame` that contains all
+individuals of the species "DM" that were collected in 2002.
+  * How many individuals of the species "DM" were collected in 2002?
 
-```
-## Error: object 'dat' not found
-```
+## Adding a column to our dataset
 
-The class output tells us that data currently is a data.frame in R.
-
-This is similar to a spreadsheet in excel, that many of us are familiar with using.
-
-The str output tells us what columns there are and what type they are.
-
-The summary output summarizes our columns and shows us the range of our values.
-
-
-
-
-__Useful functions__
-
-* `head()` - see first 6 rows
-* `tail()` - see last 6 rows
-* `dim()` - see dimensions
-* `nrow()` - number of rows
-* `ncol()` - number of columns
-* `str()` - structure of each column
-* `names()` - will list the names attribute for a data frame (or any object really), which gives the column names.
-* A data frame is a special type of list where every element of the list has same length.
-
-`str` output tells us the dimensions and the data types (int is integer) of each column.
-
-We can see what its shape is like this:
+Sometimes, you may have to add a new column to your dataset that represents a
+new variable. You can add columns to a `data.frame` using the function `cbind()`
+(__c__olumn __bind__). Beware, the additional column must have the same number
+of elements as there are rows in the `data.frame`. As an example, let's generate
+a vector of random numbers (using the function `runif()`) that will represent
+the variable `random_index` that we want to add to our `data.frame` survey. The
+function `runif()` takes as an argument the number of random numbers to
+generate, in our case, we want the number of rows in the surveys dataset.
 
 
 ```r
-dim(dat)
+r_ind <- runif(nrow(surveys))
+surveys_index <- cbind(surveys, random_index=r_ind)
 ```
 
-```
-## Error: object 'dat' not found
-```
+### Exercise
 
-```r
-nrow(dat)
-```
+How many columns are now in (1) the `data.frame` `surveys`, (2) the `data.frame`
+`surveys_index`?
 
-```
-## Error: object 'dat' not found
-```
 
-```r
-ncol(dat)
-```
+<!--- should we cover merge()? --->
 
-```
-## Error: object 'dat' not found
-```
+## Adding rows
 
-This tells us that data has 35549 rows and 8 columns.
+<!--- even if this is not optimal, using this approach requires to cover less -->
+<!--- material such as logical operations on vectors. Depending on how fast the -->
+<!--- group moves, it might be better to show the more correct way.            --->
 
-Let's look at the structure of the data again
+Let's create a `data.frame` that contains the information only for the species
+"DO" and "DM". We know how to create the data set for each species with the
+function `subset()`:
 
 
 ```r
-str(dat)
+surveys_DO <- subset(surveys, species == "DO")
+surveys_DM <- subset(surveys, species == "DM")
 ```
 
-```
-## Error: object 'dat' not found
-```
-
-If we look at 'plot' it says it's an integer.
- $ plot     : int  2 3 2 7 3 1 2 1 1 6
-and it is an integer, but in our case we want it to be a factor. Basically it's a category. We don't want to be able to do math with it. We want to be able to ask things about that category. So we're going to change it from an integer to a factor in our data frame.
+Similarly to `cbind()` for columns, there is a function `rbind()` (__r__ow
+__bind__) to put together two `data.frame`. With `rbind()` the number of columns
+and their names must be identical between the two objects:
 
 
 ```r
-dat$plot <- as.factor(dat$plot)
+surveys_DO_DM <- rbind(surveys_DO, surveys_DM)
 ```
 
-```
-## Error: object 'dat' not found
-```
+### Exercise
 
+Using a similar approach, construct a new `data.frame` that only includes data
+for the years 2000 and 2001.
 
-
-
+# Analyzing data
 
 ## Calculating statistics
 
-We've gotten our data in to R, so that we can do some analysis with it.
-First, let's get a sense of our data
-We might for instance want to know how many animals we trapped in each plot, or
-how many of each species were caught.
-
-We can look at just one column at a time in different ways. We can reference that
-column by it's number
-
-
-```r
-# Look at the weight column, the 8th one
-dat[,8]
-```
-
-```
-## Error: object 'dat' not found
-```
-
-or by its name
-
-```r
-# Look at the weight column, by its name wgt
-dat$wgt
-```
-
-```
-## Error: object 'dat' not found
-```
-
-If you forget the column names, you can type
-
-
-```r
-colnames(dat)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-or
-
-
-```r
-str(dat)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-will show you the column names and the type of data in them
-
-If we do this, we can see for instance that there are 48 species
-Factor w/ 48 levels means there are 48 different versions of that factor
-
+We've gotten our data in to R, so that we can do some analysis with it.  First,
+let's get a sense of our data. We might for instance want to know how many
+animals we trapped in each plot, or how many of each species were caught.
 
 So, let's get a list of all the species. The 'unique' command tells us all the
 unique names in that column.
 
-```r
-unique(dat$species)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-Now let's see how many of each species we have
 
 ```r
-table(dat$species)
+unique(surveys$species)
 ```
 
-```
-## Error: object 'dat' not found
-```
-
-We could even assign it to a variable and make it a data frame to make it easier to look at
+Now let's see how many of each species we have:
 
 
 ```r
-species_table <- as.data.frame(table(dat$species))
+table(surveys$species)
 ```
 
-```
-## Error: object 'dat' not found
-```
-
-Maybe we also want to see how many animals were captured in each plot
+R has a lot of built in statistical functions, like `mean()`, `median()`,
+`max()`, `min()`. Let's start by calculating the average weight of all the
+animals using the function `mean()`:
 
 
 ```r
-table(dat$plot)
+mean(surveys$wgt)
 ```
 
 ```
-## Error: object 'dat' not found
+## [1] NA
 ```
 
-Now we want to do some actual calculations with the data though. Let's calculate the average weight of all the animals. R has a lot of built in statistical functions, like mean, median, max, min
+Hmm, we just get `NA`. That's because we don't have the weight for every animal
+and missing data is recorded as `NA`. By default, all R functions operating on a
+vector that contains missing data will return NA. It's a way to make sure that
+users know they have missing data, and make a conscious decision on how to deal
+with it.
 
-
-
-```r
-mean(dat$wgt)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-Hmm, we just get NA. That's because we don't have the weight for every animal
-and it's recorded as NA when we don't. We can't do math on NA. Conveniently R
-provides a function na.omit() that will omit NAs from your data.
-
-How many animals would we omit. We can look at how many animals we have overall and subtract how many we have after the NAs are omitted.
-
-Because data is in a vector, when we want to know how much of something we have
-we ask how long it is with the length() function.
+When dealing with simple statistics like the mean, the easiest way to ignore
+`NA` (the missing data) is to use `na.rm=TRUE` (`rm` stands for remove):
 
 
 ```r
-length(dat$wgt)
+mean(surveys$wgt, na.rm=TRUE)
 ```
 
 ```
-## Error: object 'dat' not found
+## [1] 42.67
 ```
+
+In some cases, it might be useful to remove the missing data from the
+vector. For this purpose, R comes with the function `na.omit`:
 
 
 ```r
-length(na.omit(dat$wgt))
+wgt_noNA <- na.omit(surveys$wgt)
 ```
 
-```
-## Error: object 'dat' not found
-```
-
-We can then subtract those numbers
+For some applications, it's useful to keep all observations, for others, it
+might be best to remove all observations that contain missing data. The function
+`complete.cases()` removes all rows that contain some missing data:
 
 
 ```r
-length(dat$wgt) - length(na.omit(dat$wgt))
+surveys_complete <- surveys[complete.cases(surveys), ]
 ```
 
-```
-## Error: object 'dat' not found
-```
-
-We can see we'll be omitting 3266 animals. Bummer, but not terrible when we've sampled over 35,000 animals.
-
-Let's calculate their average weight
+<!--- need to cover negation, and vector operations for this...
+If you want to remove only the observations that are missing data for one
+variable, you can use the function `is.na()`. For instance, to create a new
+dataset that only contains individuals that have been weighted:
 
 
 ```r
-mean(na.omit(dat$wgt))
+surveys_with_weights <- surveys[!is.na(surveys$weight), ]
 ```
 
 ```
-## Error: object 'dat' not found
+## Warning: is.na() applied to non-(list or vector) of type 'NULL'
 ```
+--->
 
-It gets a little annoying to type na.omit(dat$wgt) each time we want to do the calculation, so we can actually create a new data frame with the rows that have
-NA omitted with the complete.cases() command. Don't worry too much about this. You can google it to learn more about it if you need to use it.
+### Exercise
+
+1. To determine the number of elements found in a vector, we can use
+use the function `length()` (e.g., `length(surveys$wgt)`). Using `length()`, how
+many animals have not had their weights recorded?
+
+1. What is the median weight for the males?
+
+1. What is the range (minimum and maximum) weight?
+
+1. Bonus question: what is the standard error for the weight? (hints: there is
+   no built-in function to compute standard errors, and the function for the
+   square root is `sqrt()`).
+
+
+## Statistics across factor levels
+
+What if we want the maximum weight for all animals, or the average for each
+plot?
+
+R comes with convenient functions to do this kind of operations, functions in
+the `apply` family.
+
+For instance, `tapply()` allows us to repeat a function across each level of a
+factor. The format is:
 
 
 ```r
-dat2 <- dat[complete.cases(dat$wgt),]
+tapply(columns_to_do_the_calculations_on, factor_to_sort_on, function)
 ```
 
-```
-## Error: object 'dat' not found
-```
-
+If we want to calculate the mean for each species (using the complete dataset):
 
 
 ```r
-mean(dat2$wgt)
+tapply(surveys_complete$wgt, surveys_complete$species, mean)
 ```
 
-```
-## Error: object 'dat2' not found
-```
-
-__EXERCISES__
-
-R has a bunch of handy statistical functions built in. Calculate the median, standard deviation, minimum and maximum weight. For bonus points calculate the standard error.
-
-
-
-
-
-## FUNCTIONS - Operations Across Axes
-
-What if we need the maximum weight for all animals, or the average for each plot?
-As the diagram below shows, we want to perform the operation across an axis:
-
-To support this, in R we can use the `apply` or 'tapply' function:
-tapply() takes a vector, so we'll use that
+This produces some `NA` because R "remembers" all species that were found in the
+original dataset, even if they didn't have any weight data associated with them
+in the current dataset. To remove the `NA` and make things clearer, we can
+redefine the levels for the factor "species" before calculating the means. Let's
+also create an object to store these values:
 
 
 ```r
-help(tapply) #or ?apply
+surveys_complete$species <- factor(surveys_complete$species)
+species_mean <- tapply(surveys_complete$wgt, surveys_complete$species, mean)
 ```
 
-Apply allows us to repeat a function on all of the rows (1), columns (2), or both(1:2) of an array or matrix.
+### Exercise
 
-What if you wanted to now go on and calculate the average weight of each species.
-You could do this one by one, but you can actually do it all at once with the tapply() function.
+1. Create new objects to store: the standard deviation, the maximum and minimum
+   values for the weight of each species
+1. How many species do you have these statistics for?
+1. Create a new data frame (called `surveys_summary`) that contains as columns:
+   * `species` the 2 letter code for the species names
+   * `mean_wgt` the mean weight for each species
+   * `sd_wgt` the standard deviation for each species
+   * `min_wgt`  the minimum weight for each species
+   * `max_wgt`  the maximum weight for each species
 
-The format is
-
-tapply(data_you_want_to_calculate, factor_to_sort_on, function)
+**Answers**
 
 
 ```r
-tapply(dat2$wgt, dat2$species, mean)
+species_max <- tapply(surveys_complete$wgt, surveys_complete$species, max)
+species_min <- tapply(surveys_complete$wgt, surveys_complete$species, min)
+species_sd <- tapply(surveys_complete$wgt, surveys_complete$species, sd)
+nlevels(surveys_complete$species) # or length(species_mean)
+surveys_summary <- data.frame(species=levels(surveys_complete$species),
+                              mean_wgt=species_mean,
+                              sd_wgt=species_sd,
+                              min_wgt=species_min,
+                              max_wgt=species_max)
 ```
 
-```
-## Error: object 'dat2' not found
-```
 
-Now we can put all the means into a variable
+# Plotting
+
+The mathematician Richard Hamming once said, "The purpose of computing is
+insight, not numbers", and the best way to develop insight is often to visualize
+data. Visualization deserves an entire lecture (or course) of its own, but we
+can explore a few features of R's base plotting package.
+
+Let's use the `surveys_summary` data that we generated and plot it.
+
+R has built in plotting functions.
 
 
 ```r
-species_means <- tapply(dat2$wgt, dat2$species, mean)
+barplot(surveys_summary$mean_wgt)
 ```
 
-```
-## Error: object 'dat2' not found
-```
+![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31.png) 
 
-We still get NAs. That's because of the way that R keeps track of NAs when
-you're converting data frames. There are ways to get around that for the apply
-function, but we can use the aggregate function instead, which we'll cover next.
-
-### Challenge
-1. Find the maximum and minimum values for weight for each species
-2. Save these values to a varible.
-3. What is the length of your new variable?
+The axis labels are too big though, so you can't see them all. Let's change that.
 
 
 ```r
-species_max <- tapply(dat2$wgt, dat2$species, max)
+barplot(surveys_summary$mean_wgt, cex.names=0.4)
 ```
 
-```
-## Error: object 'dat2' not found
-```
+![plot of chunk unnamed-chunk-32](figure/unnamed-chunk-32.png) 
 
-```r
-species_min <- tapply(dat2$wgt, dat2$species, min)
-```
-
-```
-## Error: object 'dat2' not found
-```
-
-```r
-length(species_max)
-```
-
-```
-## Error: object 'species_max' not found
-```
-
-```r
-length(species_min)
-```
-
-```
-## Error: object 'species_min' not found
-```
-
-
-
-
-Now that we have all this summary information, we can put it back together into a data frame that we can use for further analysis and plotting, provided they are the same length.
-
+Alternatively, we may want to flip the axes to have more room for the species names:
 
 
 ```r
-d.summary = data.frame(species_means, species_min, species_max)
+barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1)
 ```
 
-```
-## Error: object 'species_means' not found
-```
+![plot of chunk unnamed-chunk-33](figure/unnamed-chunk-33.png) 
 
-We can also do this with the aggregate function, which deals with the NA rows that we eliminated more nicely. This is a very useful function, and it puts the output in to a data frame rather than a list.
-If you look at documentation for aggregate() there's a few different ways to write the function. This is one way.
-
-The format is
-aggregate(what-to-plot~what-you-want-it-sorted-by, data=the-dataset, function)
+Let's also add some colors, and add a main title, label the axis:
 
 
 ```r
-mean_species <- aggregate(wgt~species, data=dat, mean)
+barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1,
+        col=c("lavender", "lightblue"), xlab="Weight (g)",
+        main="Mean weight per species")
 ```
 
-```
-## Error: object 'dat' not found
-```
+![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34.png) 
 
-Maybe we want to look at the data average per species per plot
+### Exercises
+
+1. Create a new plot showing the standard deviation for each species. Choose
+   colors from
+   [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). (If you
+   prefer, you can also specify colors using their hexadecimal values
+   `#RRGGBB`.)
+
+## More about plotting
+
+There's lots of different ways to plot things. You can do `plot(object)` for
+most classes included in R base. To explore some of the possibilities:
 
 
 ```r
-aggregate(wgt~species+plot, data=dat, mean)
+?barplot
+?boxplot
+?plot.default
+example(barplot)
 ```
 
-```
-## Error: object 'dat' not found
-```
+There's also a plotting package called [`ggplot2`](http://docs.ggplot2.org/)
+that adds a lot of functionality. The syntax takes some getting used to but it's
+extremely powerful and flexible.
 
-Or we just want to look at the average of particular species in each plot. Then we can subset the data within the function
+If you wanted to output this plot to a pdf file rather than to the screen, you
+can specify where you want the plot to go with the `pdf()` function. If you
+wanted it to be a JPG, you would use the function `jpeg()` (other formats
+available: svg, png, ps).
 
-
-```r
-aggregate(wgt~species+plot, data=subset(dat, species == "DO"), mean)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-__EXERCISES__
-
-1. Create a data frame with the standard deviation of weight for each species
-
-
-```r
-sd_species <- aggregate(wgt~species, data=dat, sd)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-
-## Plotting
-The mathematician Richard Hamming once said, "The purpose of computing is insight, not numbers," and the best way to develop insight is often to visualize data. Visualization deserves an entire lecture (or course) of its own, but we can explore a few features of R's base plotting package and ggplot2 here.
-
-Lets use the average species data that we saved and plot it.
-
-R has built in plotting functions
-
-
-```r
-barplot(mean_species$wgt, names.arg=mean_species$species)
-```
-
-```
-## Error: object 'mean_species' not found
-```
-
-
-The axis labels are too big though, so you can't see them all. Let's change that
-
-```r
-barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4)
-```
-
-```
-## Error: object 'mean_species' not found
-```
-
-and change the color
-
-
-```r
-barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c("blue"))
-```
-
-```
-## Error: object 'mean_species' not found
-```
-
-
-__EXERCISES__
-
-1. Create a plot showing the standard deviation of the species data
+Be sure to add `dev.off()` at the end to finalize the file. For `pdf()`, you can
+create multiple pages to your file, by generating multiple plots before calling
+`dev.off()`.
 
 
 
 ```r
-barplot(sd_species$wgt, names.arg=sd_species$species)
-```
-
-```
-## Error: object 'sd_species' not found
-```
-
-2. Calculate the average weight by plot id
-
-```r
-plot_mean <- aggregate(wgt~plot, data=dat, mean)
-```
-
-```
-## Error: object 'dat' not found
-```
-
-3. Plot the average weight by plot and make the bars red
-
-```r
-barplot(plot_mean$wgt, names.arg=plot_mean$species, col=c("red"))
-```
-
-```
-## Error: object 'plot_mean' not found
-```
-
-There's lots of different ways to plot things. You can use
-
-```r
-help(barplot)
-```
-or search online
-
-There's also a plotting package called ggplot that adds a lot of functionality. I'm not going to go through it, but you can see a gallery of what's possible for plotting with ggplot.
-
-Basically, you can do almost anything, and you can spend infinite time refining it.
-
-If you wanted to output this plot do a pdf rather than to the screen, you can
-specify where you want the plot to go with the 'pdf' command. If you wanted
-it to be a jpeg, you would set it as 'jpeg'
-
-Be sure to add the 'dev.off()' command at the end.
-That command makes it so that the plots go back to getting printed within R.
-Otherwise every new plot you make will get printed to that pdf.
-
-
-```r
-pdf("R_plot.pdf")
-barplot(mean_species$wgt, names.arg=mean_species$species, cex.names=0.4, col=c("blue"))
-```
-
-```
-## Error: object 'mean_species' not found
-```
-
-```r
+pdf("mean_per_species.pdf")
+barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1,
+        col=c("lavender", "lightblue"), xlab="Weight (g)",
+        main="Mean weight per species")
 dev.off()
 ```
-
-__Package management__
-
-`install.packages("package-name")` will download a package from one of the CRAN mirrors assuming that a binary is available for your operating system. If you have not set a preferred CRAN mirror in your options(), then a menu will pop up asking you to choose a location.
-
-Use `old.packages()` to list all your locally installed packages that are now out of date. `update.packages()` will update all packages in the known libraries interactively. This can take a while if you haven't done it recently. To update everything without any user intervention, use the `ask = FALSE` argument.
-
-In RStudio, you can also do package management through Tools -> Install Packages.
-
-Updating packages can sometimes make changes, so if you already have a lot of code in R, don't run this now. Otherwise let's just go ahead and update our pacakges so things are up to date.
-
-
-
-```r
-update.packages(ask = FALSE)
-```
-
-
-### Objectives
-* Explain what a library is, and what libraries are used for.
-* Load an R library and use the things it contains.
-* Read tabular data from a file into a program.
-* Assign values to variables.
-* Learn about data types
-* Select individual values and subsections from data.
-* Perform operations on arrays of data.
-* Display simple graphs.
-
-## Loading Data
-----------------
-
-Words are useful, but what's more useful are the sentences and stories we use them to build.
-Similarly, while a lot of powerful tools are built into languages like R,
-even more lives in the libraries they are used to build.
-Importing a library is like getting a piece of lab equipment out of a storage locker
-and setting it up on the bench.
-Once it's done, we can ask the library to do things for us.
-
-
-## Key Points
-
-* Import a library into a program using library libraryname.
-* What are the data types in R?
-* Use `variable = value` to assign a value to a variable in order to record it in memory.
-* Variables are created on demand whenever a value is assigned to them.
-* Use print something to display the value of something.
-* The expression `dim()` gives the dimensions of a data frame or matrix.
-* Use `object[x, y]` to select a single element from an array.
-* Array indices start at 1.
-* Use low:high to specify a slice that includes the indices from low to high.
-* Use # some kind of explanation to add comments to programs.
-* Use `mean()`, `max()`, `min()` and `sd()` to calculate simple statistics.
-* Update vectors using append
-* Use base R and the `ggplot2` library for creating simple visualizations.
