@@ -87,6 +87,56 @@ line.
 `=` should only be used to specify the values of arguments in functions for
 instance `read.csv(file="data/some_data.csv")`.
 
+## Functions and their arguments
+
+Let's look at a simple function call:
+
+
+```r
+surveys <- read.csv(file="data/surveys.csv")
+```
+
+The `file=` part inside the parentheses is called an argument, and most
+functions use arguments. Arguments modify the behavior of the
+function. Typically, they take some input (typically data) and other options to
+change what the function will return, or how to treat the data provided.
+
+Most functions can take several arguments, but most are specified by default so
+you don't have to enter them. To see these default values, you can either type
+`args(read.csv)` or look at the help for this function (e.g., `?read.csv`).
+
+
+```r
+args(surveys)
+```
+
+```
+## NULL
+```
+
+If you provide the arguments in the exact same order as they are defined you
+don't have to name them:
+
+
+```r
+read.csv(file="data/surveys.csv", header=TRUE) # is identical to:
+read.csv("data/surveys.csv", TRUE)
+```
+
+However, it's usually not recommended practice because it's a lot of remembering
+to do, and if you share your code with others that includes less known functions
+it makes your code difficult to read. (It's however OK to do so for basic
+functions like `mean`, `min`, etc...)
+
+Another advantage of naming arguments, is that the order doesn't matter:
+
+
+```r
+read.csv(file="data/surveys.csv", header=TRUE) # is identical to:
+read.csv(header=TRUE, file="data/surveys.csv")
+```
+
+
 ## Good practices
 
 There are two main ways of interacting with R: using the console or by using
