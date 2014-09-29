@@ -32,6 +32,9 @@ Combine conditions:
 
     SELECT * FROM table_name WHERE (column_name_1 >= 1000) AND (column_name_2 = 'A' OR column_name_2 = 'B');
 
+Combine conditions (alternative option):
+
+    SELECT * FROM table_name WHERE (column_name_1 >= 1000) AND (column_name_2 IN ('A','B'));
 
 Sorting
 -------
