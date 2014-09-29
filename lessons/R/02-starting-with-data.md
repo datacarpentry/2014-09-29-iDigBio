@@ -413,9 +413,9 @@ How many columns are now in (1) the `data.frame` `surveys`, (2) the `data.frame`
 
 ## Adding rows
 
-<!--- even if this is not optimal, using this approach requires to cover less -->
+<!--- even if this is not optimal, using this approach requires to cover less   -->
 <!--- material such as logical operations on vectors. Depending on how fast the -->
-<!--- group moves, it might be better to show the more correct way.            --->
+<!--- group moves, it might be better to show the correct way.                  -->
 
 Let's create a `data.frame` that contains the information only for the species
 "DO" and "DM". We know how to create the data set for each species with the
@@ -441,23 +441,73 @@ surveys_DO_DM <- rbind(surveys_DO, surveys_DM)
 Using a similar approach, construct a new `data.frame` that only includes data
 for the years 2000 and 2001.
 
+## Removing columns
+
+Just like you can select columns by their positions in the `data.frame` or by
+their names, you can remove them similarly.
+
+To remove it by column number:
+
+
+```r
+surveys_noDate <- surveys[, -c(2:4)]
+colnames(surveys)
+```
+
+```
+## [1] "survey_id" "month"     "day"       "year"      "plot_id"   "species"  
+## [7] "sex"       "wgt"
+```
+
+```r
+colnames(surveys_noDate)
+```
+
+```
+## [1] "survey_id" "plot_id"   "species"   "sex"       "wgt"
+```
+
+The easiest way to remove by name is to use the `subset()` function. This time
+we need to specify explicitly the argument `select` as the default is to subset
+on rows (as above). The minus sign indicates the names of the columns to remove
+(note that the column names should not be quoted):
+
+
+```r
+surveys_noDate2 <- subset(surveys, select=-c(month, day, year))
+colnames(surveys_noDate2)
+```
+
+```
+## [1] "survey_id" "plot_id"   "species"   "sex"       "wgt"
+```
+
+## Removing rows
+
+Typically rows are not associated with names, so to remove them from the
+`data.frame`, you can do:
+
+
+```r
+surveys_missingRows <- surveys[-c(10, 50:70), ] # removing rows 10, and 50 to 70
+```
+
 # Analyzing data
 
 ## Calculating statistics
 
-We've gotten our data in to R, so that we can do some analysis with it.  First,
-let's get a sense of our data. We might for instance want to know how many
-animals we trapped in each plot, or how many of each species were caught.
+Let's get a closer look at our data. For instance, we might want to know how
+many animals we trapped in each plot, or how many of each species were caught.
 
-So, let's get a list of all the species. The 'unique' command tells us all the
-unique names in that column.
+So, let's get a `vector` of all the species. The `unique()` function tells us
+all the unique names in that column.
 
 
 ```r
 unique(surveys$species)
 ```
 
-Now let's see how many of each species we have:
+Now, let's see how many of each species we have:
 
 
 ```r
@@ -621,7 +671,7 @@ R has built in plotting functions.
 barplot(surveys_summary$mean_wgt)
 ```
 
-![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31.png) 
+![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34.png) 
 
 The axis labels are too big though, so you can't see them all. Let's change that.
 
@@ -630,7 +680,7 @@ The axis labels are too big though, so you can't see them all. Let's change that
 barplot(surveys_summary$mean_wgt, cex.names=0.4)
 ```
 
-![plot of chunk unnamed-chunk-32](figure/unnamed-chunk-32.png) 
+![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35.png) 
 
 Alternatively, we may want to flip the axes to have more room for the species names:
 
@@ -639,7 +689,7 @@ Alternatively, we may want to flip the axes to have more room for the species na
 barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1)
 ```
 
-![plot of chunk unnamed-chunk-33](figure/unnamed-chunk-33.png) 
+![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36.png) 
 
 Let's also add some colors, and add a main title, label the axis:
 
@@ -650,7 +700,7 @@ barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1,
         main="Mean weight per species")
 ```
 
-![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34.png) 
+![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37.png) 
 
 ### Exercises
 
