@@ -1,0 +1,76 @@
+
+
+```{r setup, echo=FALSE}
+library(ggplot2)
+```
+
+```{r author_info, echo=FALSE}
+first_name <- ""
+last_name <- ""
+institution <- ""
+address <- ""
+```
+
+```{r, results='hide', echo=FALSE}
+hol_data <- read.csv(file="data_output/occurrence_holothuria.csv")
+
+long_red_sea <- c(30, 50)
+lat_red_sea <- c(10, 32)
+
+hol_data_red_sea <- subset(hol_data, (dwc.decimalLatitude > lat_red_sea[1] & dwc.decimalLatitude < lat_red_sea[2]) &
+                                     (dwc.decimalLongitude > long_red_sea[1] & dwc.decimalLatitude < long_red_sea[2]))
+
+## replace by an expression that allows you to calculate the number
+## of individuals in the data set that occur in the red sea
+n_red_sea <- 999
+
+
+## replace by the an expression that allows you to calculate the number
+## of species that occur in the red sea
+n_species_red_sea <- 999
+
+## replace by an expression that allows you to calculate the total number
+## of species in the dataset
+n_species <- 999
+
+```
+
+# The sea cucumber fauna from the Red Sea
+
+By `r last_name`, `r first_name`
+
+From `r institution`
+
+---------------------------------------------
+
+We analyzed all the records for the family Holothuriidae found in
+[iDigBio](http://portal.idigbio.org) (N = `r nrow(hol_data)`). Among them,
+`r n_red_sea` were found to occur in the Red Sea. They represented
+`r n_species_red_sea` species or `r round(100 * n_species_red_sea/n_species, 2)` of
+the all species included in our dataset. However, `r n_missing` lots were not associated
+with any coordinate information.
+
+The figure below shows a map of all these occurrences.
+
+```{r map, echo=FALSE}
+world_map <- map_data("world")
+
+ggplot(hol_data_red_sea) + annotation_map(world_map, fill="gray40", colour="gray40") +
+    geom_point(aes(x=dwc.decimalLongitude, y=dwc.decimalLatitude, color=dwc.specificEpithet),
+               position=position_jitter(width=0.2, height=0.2)) +
+    theme(panel.background = element_rect(fill="aliceblue"),
+          legend.position = "none") +
+    coord_map(projection = "mercator", orientation=c(90, 160, 0),
+              xlim=long_red_sea,  # limits on longitude
+              ylim=lat_red_sea) + # limits on latitude
+   xlab("Longitude") + ylab("Latitude")
+
+```
+
+This figure shows the map for ...
+
+```{r}
+## create a map that shows one of the species of your choice, the most sampled species,
+##  the full distribution of a species, or whatever else you'd like
+
+```
