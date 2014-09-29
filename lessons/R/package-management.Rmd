@@ -1,0 +1,22 @@
+__Package management__
+
+
+Words are useful, but what's more useful are the sentences and stories we use them to build.
+Similarly, while a lot of powerful tools are built into languages like R,
+even more lives in the libraries they are used to build.
+Importing a library is like getting a piece of lab equipment out of a storage locker
+and setting it up on the bench.
+Once it's done, we can ask the library to do things for us.
+
+`install.packages("package-name")` will download a package from one of the CRAN mirrors assuming that a binary is available for your operating system. If you have not set a preferred CRAN mirror in your options(), then a menu will pop up asking you to choose a location.
+
+Use `old.packages()` to list all your locally installed packages that are now out of date. `update.packages()` will update all packages in the known libraries interactively. This can take a while if you haven't done it recently. To update everything without any user intervention, use the `ask = FALSE` argument.
+
+In RStudio, you can also do package management through Tools -> Install Packages.
+
+Updating packages can sometimes make changes, so if you already have a lot of code in R, don't run this now. Otherwise let's just go ahead and update our pacakges so things are up to date.
+
+
+```{r, eval=FALSE}
+update.packages(ask = FALSE)
+```
