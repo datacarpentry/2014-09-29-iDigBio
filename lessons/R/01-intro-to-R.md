@@ -30,6 +30,11 @@ _Start by showing an example of a script_
 
 ## Creating objects
 
+
+```r
+### Creating objects (assignments)
+```
+
 You can get output from R simply by typing in math in the console
 
 
@@ -120,6 +125,11 @@ massIndex <- mass/age  # massIndex?
 
 ## Vectors and data types
 
+
+```r
+### Vectors and data types
+```
+
 A vector is the most common and basic data structure in R, and is pretty much
 the workhorse of R. It's a group of values, mainly either numbers or
 characters. You can assign this list of values to a variable, just like you
@@ -194,7 +204,12 @@ ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`) and
 factors (`factor`). They are all built using vectors. We will talk about
 `data.frame` soon but first we need to learn about `factor`.
 
+## Factors
+
+
+```r
 ### Factors
+```
 
 Factors are special vectors that represent categorical data. Factors can be
 ordered or unordered and are important for statistical analysis and for
@@ -266,6 +281,8 @@ bar plots quickly. For instance:
 
 
 ```r
+## Question: How can you recreate this plot but by having "control"
+## being listed last instead of first?
 exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control",
                    "control", "treat1", "treat2", "control", "treat3", "control"))
 table(exprmt)
@@ -281,10 +298,9 @@ table(exprmt)
 barplot(table(exprmt))
 ```
 
-![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
+![plot of chunk unnamed-chunk-23](figure/unnamed-chunk-23.png) 
 
-**Question** How can you recreate this plot but by having "control" being listed
-last instead of first?
+
 
 <!---
 
@@ -293,5 +309,5 @@ exprmt <- factor(exprmt, levels=c("treat1", "treat2", "treat3", "control"))
 barplot(table(exprmt))
 ```
 
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
+![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-24.png) 
 --->
