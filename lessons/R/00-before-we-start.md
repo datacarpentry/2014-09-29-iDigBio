@@ -111,7 +111,7 @@ args(surveys)
 ```
 
 ```
-## NULL
+## Error: object 'surveys' not found
 ```
 
 If you provide the arguments in the exact same order as they are defined you
@@ -297,15 +297,13 @@ sessionInfo()
 ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] grid      stats     graphics  grDevices utils     datasets  methods  
-## [8] base     
+## [1] stats     graphics  grDevices utils     datasets  base     
 ## 
 ## other attached packages:
-## [1] knitr_1.6      devtools_1.6   fortunes_1.5-2
+## [1] knitr_1.6
 ## 
 ## loaded via a namespace (and not attached):
-## [1] compiler_3.1.1 evaluate_0.5.5 formatR_1.0    markdown_0.7.4
-## [5] mime_0.1.2     stringr_0.6.2  tools_3.1.1
+## [1] evaluate_0.5.5 formatR_1.0    stringr_0.6.2  tools_3.1.1
 ```
 
 ### Where to ask for help?
