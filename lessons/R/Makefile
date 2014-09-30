@@ -16,7 +16,7 @@ starting-with-data: 02-starting-with-data.Rmd
 	Rscript -e "knitr::knit2html('$<')"
 
 workflows: 03-workflows.Rmd
-	Rscript -e "knitr::purl('$<', output='skeleton-worflows.R', documentation=0L)"
+	Rscript -e "knitr::purl('$<', output='skeleton-workflows.R', documentation=0L)"
 	Rscript -e "knitr::knit2html('$<')"
 
 clean:
