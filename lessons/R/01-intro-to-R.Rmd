@@ -33,7 +33,7 @@ _Start by showing an example of a script_
 
 ## Creating objects
 
-```{r, purl=TRUE}
+```{r, echo=FALSE, purl=TRUE}
 ### Creating objects (assignments)
 ```
 
@@ -119,7 +119,7 @@ massIndex <- mass/age  # massIndex?
 
 ## Vectors and data types
 
-```{r, purl=TRUE}
+```{r, echo=FALSE, purl=TRUE}
 ### Vectors and data types
 ```
 
@@ -193,7 +193,7 @@ factors (`factor`). They are all built using vectors. We will talk about
 
 ## Factors
 
-```{r, purl=TRUE}
+```{r, echo=FALSE, purl=TRUE}
 ### Factors
 ```
 
@@ -250,7 +250,7 @@ If you need to convert a factor to a character vector, simply use
 Converting a factor to a numeric vector is however a little trickier, and you
 have to go via a character vector. Compare:
 
-```{r}
+```{r, purl=TRUE}
 f <- factor(c(1, 5, 10, 2))
 as.numeric(f) ## wrong! and there is no warning...
 as.numeric(as.character(f))

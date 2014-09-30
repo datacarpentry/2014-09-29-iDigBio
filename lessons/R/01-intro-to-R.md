@@ -31,9 +31,6 @@ _Start by showing an example of a script_
 ## Creating objects
 
 
-```r
-### Creating objects (assignments)
-```
 
 You can get output from R simply by typing in math in the console
 
@@ -126,9 +123,6 @@ massIndex <- mass/age  # massIndex?
 ## Vectors and data types
 
 
-```r
-### Vectors and data types
-```
 
 A vector is the most common and basic data structure in R, and is pretty much
 the workhorse of R. It's a group of values, mainly either numbers or
@@ -207,9 +201,6 @@ factors (`factor`). They are all built using vectors. We will talk about
 ## Factors
 
 
-```r
-### Factors
-```
 
 Factors are special vectors that represent categorical data. Factors can be
 ordered or unordered and are important for statistical analysis and for
