@@ -23,6 +23,8 @@ We want to:
 
 # Presentation of the Survey Data
 
+
+
 We are studying the species and weight of animals caught in plots in our study
 area.  The dataset is stored as a `.csv` file: each row holds information for a
 single animal, and the columns represent `survey_id` (represented as global
@@ -106,12 +108,15 @@ Based on the output of `str(surveys)`, can you answer the following questions?
 * How many species have been recorded during these surveys?
 
 
+
 # About the `data.frame` class
+
+
 
 `data.frame` is the _de facto_ data structure for most tabular data and what we
 use for statistics and plotting.
 
-`data.frame` are a collection of vectors of identical lengths. Each vector
+A `data.frame` is a collection of vectors of identical lengths. Each vector
 represents a column, and each vector can be of a different data type (e.g.,
 characters, integers, factors). The `str()` function is useful to inspect the
 data types of the columns.
@@ -125,7 +130,7 @@ they are not used.
 `data.frame` can be created by the functions `read.csv()` or `read.table()`, in
 other words, when importing spreadsheets from your hard drive (or the web).
 
-By default, `data.frame` converts (= coerces) columns that contain characters
+By default, `data.frame` convert (= coerce) columns that contain characters
 (i.e., text) into the `factor` data type. Depending on what you want to do with
 the data, you may want to keep these columns as `character`. To do so,
 `read.csv()` and `read.table()` have an argument called `stringsAsFactors` which
@@ -177,19 +182,24 @@ __Point to the differences between character and factor output with str()__
 ### Exercises
 
 1. There are a few mistakes in this hand crafted `data.frame`, can you spot and
-   fix them? Don't hesitate to experiment!
+fix them? Don't hesitate to experiment!
 
    
    ```r
-    author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
-                              author_last=c(Darwin, Mayr, Dobzhansky),
-                              year=c(1942, 1970))
+   ##  There are a few mistakes in this hand crafted `data.frame`,
+   ##  can you spot and fix them? Don't hesitate to experiment!
+   author_book <- data.frame(author_first=c("Charles", "Ernst", "Theodosius"),
+                                author_last=c(Darwin, Mayr, Dobzhansky),
+                                year=c(1942, 1970))
    ```
 
 1. Can you predict the class for each of the columns in the following example?
 
    
    ```r
+   ## Can you predict the class for each of the columns in the following example?
+   ## Check your guesses using `str(country_climate)`. Are they what you expected?
+   ##  Why? why not?
    country_climate <- data.frame(country=c("Canada", "Panama", "South Africa", "Australia"),
                                   climate=c("cold", "hot", "temperate", "hot/temperate"),
                                   temperature=c(10, 30, 18, "15"),
@@ -197,12 +207,12 @@ __Point to the differences between character and factor output with str()__
                                   has_kangaroo=c(FALSE, FALSE, FALSE, 1))
    ```
 
-   Check your gueses using `str(country_climate)`. Are they what you expected?
+   Check your guesses using `str(country_climate)`. Are they what you expected?
+   Why? why not?Check your gueses using `str(country_climate)`. Are they what you expected?
    Why? why not?
 
    R coerces (when possible) to the data type that is the least common
    denominator and the easiest to coerce to.
-
 
 
 ## Inspecting `data.frame` objects
@@ -232,6 +242,8 @@ Note: most of these functions are "generic", they can be used on other types of
 objects besides `data.frame`.
 
 ## Indexing and sequences
+
+
 
 If we want to extract one or several values from a vector, we must provide one
 or several indices in square brackets, just as we do in math. For instance:
@@ -334,6 +346,8 @@ head_surveys <- surveys[1:6, ] # surveys[1:6, ] is equivalent to head(surveys)
    `surveys_by_10` that includes every 10th row of the survey data frame
    starting at row 10 (10, 20, 30, ...)
 
+
+
 <!---
 
 ```r
@@ -344,6 +358,8 @@ surveys_by_10 <- surveys[seq(10, nrow(surveys), by=10), ]
 # Manipulating data
 
 ## Subsetting data
+
+
 
 In particular for larger datasets, it can be tricky to remember the column
 number that corresponds to a particular variable. (Are species names in column 5
@@ -377,16 +393,17 @@ surveys_DO <- subset(surveys, species == "DO")
 
 1. What does the following do?
 
-  
-  ```r
-  surveys_DO$month[2] <- 8
-  ```
+
 
 1. Use the function `subset` twice to create a `data.frame` that contains all
 individuals of the species "DM" that were collected in 2002.
   * How many individuals of the species "DM" were collected in 2002?
 
+
+
 ## Adding a column to our dataset
+
+
 
 Sometimes, you may have to add a new column to your dataset that represents a
 new variable. You can add columns to a `data.frame` using the function `cbind()`
@@ -409,6 +426,7 @@ How many columns are now in (1) the `data.frame` `surveys`, (2) the `data.frame`
 `surveys_index`?
 
 
+
 <!--- should we cover merge()? --->
 
 ## Adding rows
@@ -416,6 +434,8 @@ How many columns are now in (1) the `data.frame` `surveys`, (2) the `data.frame`
 <!--- even if this is not optimal, using this approach requires to cover less   -->
 <!--- material such as logical operations on vectors. Depending on how fast the -->
 <!--- group moves, it might be better to show the correct way.                  -->
+
+
 
 Let's create a `data.frame` that contains the information only for the species
 "DO" and "DM". We know how to create the data set for each species with the
@@ -441,7 +461,11 @@ surveys_DO_DM <- rbind(surveys_DO, surveys_DM)
 Using a similar approach, construct a new `data.frame` that only includes data
 for the years 2000 and 2001.
 
+
+
 ## Removing columns
+
+
 
 Just like you can select columns by their positions in the `data.frame` or by
 their names, you can remove them similarly.
@@ -484,6 +508,8 @@ colnames(surveys_noDate2)
 
 ## Removing rows
 
+
+
 Typically rows are not associated with names, so to remove them from the
 `data.frame`, you can do:
 
@@ -495,6 +521,8 @@ surveys_missingRows <- surveys[-c(10, 50:70), ] # removing rows 10, and 50 to 70
 # Analyzing data
 
 ## Calculating statistics
+
+
 
 Let's get a closer look at our data. For instance, we might want to know how
 many animals we trapped in each plot, or how many of each species were caught.
@@ -592,7 +620,10 @@ many animals have not had their weights recorded?
    square root is `sqrt()`).
 
 
+
 ## Statistics across factor levels
+
+
 
 What if we want the maximum weight for all animals, or the average for each
 plot?
@@ -639,6 +670,8 @@ species_mean <- tapply(surveys_complete$wgt, surveys_complete$species, mean)
    * `min_wgt`  the minimum weight for each species
    * `max_wgt`  the maximum weight for each species
 
+
+
 **Answers**
 
 
@@ -657,6 +690,8 @@ surveys_summary <- data.frame(species=levels(surveys_complete$species),
 
 # Plotting
 
+
+
 The mathematician Richard Hamming once said, "The purpose of computing is
 insight, not numbers", and the best way to develop insight is often to visualize
 data. Visualization deserves an entire lecture (or course) of its own, but we
@@ -671,7 +706,7 @@ R has built in plotting functions.
 barplot(surveys_summary$mean_wgt)
 ```
 
-![plot of chunk unnamed-chunk-34](figure/unnamed-chunk-34.png) 
+![plot of chunk unnamed-chunk-52](figure/unnamed-chunk-52.png) 
 
 The axis labels are too big though, so you can't see them all. Let's change that.
 
@@ -680,7 +715,7 @@ The axis labels are too big though, so you can't see them all. Let's change that
 barplot(surveys_summary$mean_wgt, cex.names=0.4)
 ```
 
-![plot of chunk unnamed-chunk-35](figure/unnamed-chunk-35.png) 
+![plot of chunk unnamed-chunk-53](figure/unnamed-chunk-53.png) 
 
 Alternatively, we may want to flip the axes to have more room for the species names:
 
@@ -689,7 +724,7 @@ Alternatively, we may want to flip the axes to have more room for the species na
 barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1)
 ```
 
-![plot of chunk unnamed-chunk-36](figure/unnamed-chunk-36.png) 
+![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-54.png) 
 
 Let's also add some colors, and add a main title, label the axis:
 
@@ -700,15 +735,17 @@ barplot(surveys_summary$mean_wgt, horiz=TRUE, las=1,
         main="Mean weight per species")
 ```
 
-![plot of chunk unnamed-chunk-37](figure/unnamed-chunk-37.png) 
+![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-55.png) 
 
 ### Exercises
 
 1. Create a new plot showing the standard deviation for each species. Choose
-   colors from
+   one or more colors from
    [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). (If you
    prefer, you can also specify colors using their hexadecimal values
    `#RRGGBB`.)
+
+
 
 ## More about plotting
 
