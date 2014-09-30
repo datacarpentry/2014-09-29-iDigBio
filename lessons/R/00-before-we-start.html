@@ -297,6 +297,46 @@ line.</p>
 <p><code>=</code> should only be used to specify the values of arguments in functions for
 instance <code>read.csv(file=&quot;data/some_data.csv&quot;)</code>.</p>
 
+<h2>Functions and their arguments</h2>
+
+<p>Let&#39;s look at a simple function call:</p>
+
+<pre><code class="r">surveys &lt;- read.csv(file=&quot;data/surveys.csv&quot;)
+</code></pre>
+
+<p>The <code>file=</code> part inside the parentheses is called an argument, and most
+functions use arguments. Arguments modify the behavior of the
+function. Typically, they take some input (typically data) and other options to
+change what the function will return, or how to treat the data provided.</p>
+
+<p>Most functions can take several arguments, but most are specified by default so
+you don&#39;t have to enter them. To see these default values, you can either type
+<code>args(read.csv)</code> or look at the help for this function (e.g., <code>?read.csv</code>).</p>
+
+<pre><code class="r">args(surveys)
+</code></pre>
+
+<pre><code>## Error: object &#39;surveys&#39; not found
+</code></pre>
+
+<p>If you provide the arguments in the exact same order as they are defined you
+don&#39;t have to name them:</p>
+
+<pre><code class="r">read.csv(file=&quot;data/surveys.csv&quot;, header=TRUE) # is identical to:
+read.csv(&quot;data/surveys.csv&quot;, TRUE)
+</code></pre>
+
+<p>However, it&#39;s usually not recommended practice because it&#39;s a lot of remembering
+to do, and if you share your code with others that includes less known functions
+it makes your code difficult to read. (It&#39;s however OK to do so for basic
+functions like <code>mean</code>, <code>min</code>, etc&hellip;)</p>
+
+<p>Another advantage of naming arguments, is that the order doesn&#39;t matter:</p>
+
+<pre><code class="r">read.csv(file=&quot;data/surveys.csv&quot;, header=TRUE) # is identical to:
+read.csv(header=TRUE, file=&quot;data/surveys.csv&quot;)
+</code></pre>
+
 <h2>Good practices</h2>
 
 <p>There are two main ways of interacting with R: using the console or by using
@@ -439,15 +479,13 @@ to understand your problem.</p>
 ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] grid      stats     graphics  grDevices utils     datasets  methods  
-## [8] base     
+## [1] stats     graphics  grDevices utils     datasets  base     
 ## 
 ## other attached packages:
-## [1] knitr_1.6      devtools_1.6   fortunes_1.5-2
+## [1] knitr_1.6
 ## 
 ## loaded via a namespace (and not attached):
-## [1] compiler_3.1.1 evaluate_0.5.5 formatR_1.0    markdown_0.7.4
-## [5] mime_0.1.2     stringr_0.6.2  tools_3.1.1
+## [1] evaluate_0.5.5 formatR_1.0    stringr_0.6.2  tools_3.1.1
 </code></pre>
 
 <h3>Where to ask for help?</h3>
