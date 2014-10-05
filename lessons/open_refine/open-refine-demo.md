@@ -1,0 +1,96 @@
+
+# Data Carpentry Open Refine Demo
+
+--------------------------------------------------
+
+# Objectives
+
+* Motivate participants to clean, organize, enhance data before insert into a database or merging data with other data files.
+* Introduce participants Open Refine as a powerful data-cleaning tool to do this.
+* Encourage dataset exploration; look at the data with the visualization tools in Open Refine.
+* Introduce concept of facets
+* Show split columns by defined separator
+* Show power of include / exclude, sort by name / count
+* Show the power of clustering algorithms to reveal data patterns, data snafus
+* If time, show call to an API, a web service (JSON example here from a locality georeferencing service)
+* If time, show how to parse the JSON returned from the service.
+* Refine provides a gentle introduction to SELECT DISTINCT, COUNT, ORDER BY, GROUP BY, and other SQL concepts in a visual way. Covering Refine first provides the SQL instructor with examples to refer back to - giving the students a reference point for understanding SQL.
+* Show the power of undo / redo.
+
+----------------------------------------------------
+
+# Motivations for the Open Refine Lesson
+
+* It's really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did. You can capture all steps done in Open Refine to the raw file and share with your publication as supplemental material.
+* All steps are easily reversed in Refine.
+* You _must_ save your work to a new file; Refine _does not_ modify your original dataset.
+* Data is often very messy - and this tool saves a lot of cleaning headaches.
+* Data cleaning often needs repeating with multiple files. Refine is perfect for speeding up repetitive tasks.
+* Some concepts like clustering algorithms are quite complex, but Refine makes it easy to introduce them, use them, and show their power.
+
+# Before we get started
+
+* Check that you have Firefox browser installed. Open Refine runs in this browser. It will not run in IE.
+* Download software from http://openrefine.org if you have not done this yet.
+* Unzip the downloaded file into a directory. Name that directory something like Open-Refine
+* Note that "double-clicking" a zipped file on a windows machine sometimes results in a correctly unzipped set of files, other times, this is not successful. Try installing 7-Zip and use 7-Zip to extract all files from the zipped file to the desired directory.
+* Go to your newly created Open-Refine directory.
+* Click the google-refine.exe file to launch Open Refine.
+* Note, this is a Java program that runs on your machine (not in the cloud). It runs inside the Firefox browser, but no web connection is needed.
+
+# Basics of Open Refine
+
+You can find out a lot more about Open Refine at http://openrefine.org and check out some great introductory videos. There is also an Open Refine Google Plus community https://plus.google.com/communities/117280693504889048168 where you can find a lot of help and a lot of folks from the life sciences are members. As with other programs of this type, Open Refine libraries are available too, where you can find a script you need and copy it into your Refine instance to run it on your dataset.
+
+* Open source.
+* A large growing community, from novice to expert, ready to help.
+* Works with large-ish datasets (100,000 rows). Does not scale to many millions. (yet).
+
+# Demo of Open Refine
+
+Start the program. (Double-click on the google-refine.exe file. Java services will start on your machine, and Refine will open in your Firefox browser).
+
+Note the file types Open Refine handles: TSV, CSF, *SV, Excel (.xls .xlsx), JSON, XML, RDF as XML, Google Data documents. Support for other formats can be added with Google Refine extensions.
+
+In this first step, we'll browse our computer to the sample data file for this lesson. In this case, I've modified the Portal_rodents csv file. I added several columns: scientificName, locality, county, state, country and I generated several more columns in the lesson itself (JSON, decimalLatitude, decimalLongitude). Data in locality, county, country, JSON, decimalLatitude and decimalLongitude are contrived and are in no way related to the original dataset. When doing this demo, the columns: JSON, decimalLatitude, decimalLongitude can be deleted, and then recreated if time, with a call to a locality service, and subsequent parsing of the JSON data returned by the service.
+
+_Once Refine is open, you'll be asked if you want to Create, Open, or Import a Project._
+
+* Click Browse, find Portal_rodents_19772002_scinameUUIDs.csv
+* Click next to open Portal_rodents_19772002_scinameUUIDs.csv
+* Refine gives you a preview - a chance to show you it understood the file. If, for example, your file was really tab-delimited, the preview might look strange, you would choose the correct separator in the box shown and click "update preview."
+* If all looks well, click _Create Project._
+
+## Faceting
+
+* Scroll over to the scientificName column
+* Click the down arrow and choose > Facet > Text facet
+* In the left margin, you'll see a box containing every unique, distinct value in the scientificName column and Refine shows you how many times that value occurs in the column (a count), and allows you to sort (order) your facets by name or count.
+* Edit. Note that at any time, in any cell of the Facet box, or data cell of the Refine window, you have access to "edit" and can fix an error immediately. Refine will even ask you if you'd like to make that same correction to every value it finds like that one (or not).
+
+## Cluster
+
+The magic of Refine, the moment you realize what you've been missing.
+
+
+
+## Split
+
+
+
+## Call a Service (this example is to georeference locality data, but could use any service).
+
+
+
+## Parse the JSON return from the service
+
+
+## Scripts
+
+* Refine saves every change, every edit you make to the dataset in a file you can save on your machine.
+* IF you had 20 files to clean, and they all had the same type of errors, and all files had the same columns, you could save the script, open a new file to clean, paste in the script and run it. Voila, clean data.
+
+
+## Export 
+
+* Save your work when you are done by exporting it in the desire format. Save your files with meaningful names, no spaces. Refine does not change your original dataset.
