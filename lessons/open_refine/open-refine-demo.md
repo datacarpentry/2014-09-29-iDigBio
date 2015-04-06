@@ -87,7 +87,7 @@ _Once Refine is open, you'll be asked if you want to Create, Open, or Import a P
 * Remove the check in the box that says "remove column after splitting"
 * You'll get two extra columns called, in this case: scientificName 1, scientificName 2
 * This will reveal an error in a few names that have spaces at the beginning (so-called leading white space).
-* * These can be easily removed with another Refine feature in the column drop-down choices. See drop-down: Edit cells > Common transforms > Remove leading and trailing whitespace
+ - These can be easily removed with another Refine feature in the column drop-down choices. See drop-down: Edit cells > Common transforms > Remove leading and trailing whitespace
 * To Undo create columns, look just above the scientificName cluster in the left side of the screen. Click where it says Undo / Redo. Click back one step (all steps, all changes are saved here). Just go back to the previous step and click. The extra columns will be gone.
 
 ## Call a Service (this example is set up to georeference locality data, but could use any service).
@@ -103,3 +103,11 @@ _Once Refine is open, you'll be asked if you want to Create, Open, or Import a P
 ## Export 
 
 * Save your work when you are done by exporting it in the desire format. Save your files with meaningful names, no spaces. Refine does not change your original dataset.
+
+#### Time estimate for this demo.
+* Takes about 20 - 30 minutes to do a good demo.
+* If students are going to install and then try this tool out on the provided dataset or their own dataset, it will take longer.
+* Mac users with the newest operating system will have to allow this to run by "allowing everything" to run. They can change the setting back after the exercise.
+* Some students will run into issues with
+  - unzipping
+  - finding the .exe file once the software has been unzipped
