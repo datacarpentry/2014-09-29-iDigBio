@@ -14,8 +14,12 @@
 * Show the power of clustering algorithms to reveal data patterns, data snafus
 * If time, show call to an API, a web service (JSON example here from a locality georeferencing service)
 * If time, show how to parse the JSON returned from the service.
-* Refine provides a gentle introduction to SELECT DISTINCT, COUNT, ORDER BY, GROUP BY, and other SQL concepts in a visual way. Covering Refine first provides the SQL instructor with examples to refer back to - giving the students a reference point for understanding SQL.
+* Refine provides a gentle introduction to SELECT DISTINCT, COUNT, ORDER BY, GROUP BY, and other SQL concepts in a visual way. Covering Refine first provides the SQL instructor with examples to refer back to - giving the students a reference point for understanding SQL. And starting with the "better spreadsheet skills" lesson, before this Open Refine demo, gives the instructor even more analogies to use when leading up to SQL. We experimented with lesson order and this seems to work best for insuring those "aha" moments.
 * Show the power of undo / redo.
+* Can be used to introduce
+ - scripting
+ - regular expressions
+ - APIs
 
 ----------------------------------------------------
 
